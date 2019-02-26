@@ -42,8 +42,11 @@ const PetCard = ({pet, handleLike, handleReject}) => {
           See more about {pet.name}!
         </Link>
       </Card.Content>
-      <Button circular positive icon='heart' onClick={handleLike} />
-      <Button circular negative icon='close' onClick={handleReject} />
+      <Button.Group size='large'>
+          <Button circular color='red' icon='close' onClick={handleReject} />
+          <Button.Or />
+          <Button circular color='green' icon='heart' onClick={handleLike} />
+      </Button.Group>
     </Card>
     </div> 
     
