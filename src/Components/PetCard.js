@@ -4,35 +4,39 @@ import { Card, Button, Icon, Image } from 'semantic-ui-react'
 
 
 
-const PetCard = props => {
-
-  const RejectButton = () => <Button circular negative icon='close' />
-  const LikeButton = () => <Button circular positive icon='heart' />
+const PetCard = ({pet, handleLike, handleReject}) => {
 
   const shortenedDescription = (description) => {
-    console.log(typeof(description))
-    return description
+    if (description) {
+      return description.length > 100 ? description.substring(0, 100) + "..." : description
+    }
   }
 
   return (
     <div className="buddy">
     <Card>
-      <Image src={props.pet.photo} />
+      <Image src={pet.photo} />
       <Card.Content>
-        <Card.Header>{props.pet.name}</Card.Header>
+        <Card.Header>{pet.name}</Card.Header>
         <Card.Meta>
-          <span className='date'>Age: {props.pet.age}</span>
+          <span className='date'>{pet.breed}</span>
         </Card.Meta>
-        <Card.Description>{shortenedDescription(props.pet.description)}</Card.Description>
+        <Card.Meta> 
+          <span className='date'>{pet.colour ? `Colour: ${pet.colour}` : "" }</span>
+        </Card.Meta>
+        <Card.Meta> 
+          <span className='date'>Age: {pet.age}</span>
+        </Card.Meta>
+        <Card.Description>{false ? pet.description : shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <a>
-          <Icon name='user' />
-          See more about {props.pet.name}!
+          <Icon name='info circle' />
+          See more about {pet.name}!
         </a>
       </Card.Content>
-      <LikeButton onClick={props.handleLike}/>
-      <RejectButton onClick={props.handleReject}/>
+      <Button circular positive icon='heart' onClick={handleLike} />
+      <Button circular negative icon='close' onClick={handleReject} />
     </Card>
     </div> 
     
