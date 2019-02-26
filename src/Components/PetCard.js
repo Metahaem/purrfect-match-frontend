@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react'
-
+import { Route, Link } from 'react-router-dom'
 
 
 
@@ -12,6 +12,13 @@ const PetCard = ({pet, handleLike, handleReject}) => {
     }
   }
 
+  let infoSwitch = false
+
+  const moreInfo = () => {
+    // infoSwitch = true
+    console.log("moreinfo!!")
+  }
+  
   return (
     <div className="buddy">
     <Card>
@@ -27,13 +34,13 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         <Card.Meta> 
           <span className='date'>Age: {pet.age}</span>
         </Card.Meta>
-        <Card.Description>{false ? pet.description : shortenedDescription(pet.description)}</Card.Description>
+        <Card.Description>{infoSwitch ? pet.description : shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
+        <Link to={`/pets/${pet.id}`}>
           <Icon name='info circle' />
           See more about {pet.name}!
-        </a>
+        </Link>
       </Card.Content>
       <Button circular positive icon='heart' onClick={handleLike} />
       <Button circular negative icon='close' onClick={handleReject} />

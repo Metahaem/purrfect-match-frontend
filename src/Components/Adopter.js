@@ -67,19 +67,17 @@ class Adopter extends Component {
         })
       }
 
-    getLikesFromAPI = (adopterID) => {
-        fetch(baseURL + `/users/${adopterID}likes`)
-        .then(res => res.json())
-        .then(data => {
-        const uniqueLikes = [...new Set(data)]
-        this.setState({likes: uniqueLikes})
-        })
-    }
+    // getLikesFromAPI = (adopterID) => {
+    //     fetch(baseURL + `/users/${adopterID}likes`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //     const uniqueLikes = [...new Set(data)]
+    //     this.setState({likes: uniqueLikes})
+    //     })
+    // }
 
-    randomiseShownPet = () => {
-        let shownPet = [...this.state.currentPet]
-        shownPet = this.state.pets[Math.round(Math.random(this.state.pets.length - 1 ))]
-        this.setState({currentPet: shownPet})
+    randomiseShownPet = (allPets) => {
+        return allPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
     }
     
 
@@ -93,7 +91,7 @@ class Adopter extends Component {
         .then(allPets => {
             this.setState({
             pets: allPets,
-            currentPet: allPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
+            currentPet: this.randomiseShownPet(allPets)
           })
       })
     }
