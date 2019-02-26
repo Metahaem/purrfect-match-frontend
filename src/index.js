@@ -6,6 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import 'semantic-ui-react'
+import 'bootstrap/dist/css/bootstrap.css';
+import * as Scroll from 'react-scroll';
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 ReactDOM.render(  
   <Router>
