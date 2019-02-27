@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PetCard from "./PetCard.js"
-import { get } from 'http';
+import '../App.css';
+import ClippedDrawer from './ClippedDrawer.js'
 
 
 const baseURL = 'http://localhost:3000/api/v1'
 const petsUrl = 'http://localhost:3000/api/v1/pets'
+
 
 class Adopter extends Component {
     state = {
@@ -35,7 +37,7 @@ class Adopter extends Component {
     //     .then(getCoordinates(this.state.currentPet.location))
     // } 
 
-    isSame
+    
 
     handleLike = () => {
         console.log("liked!")
@@ -79,7 +81,6 @@ class Adopter extends Component {
     randomiseShownPet = (allPets) => {
         return allPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
     }
-    
 
     getPetsFromAPI = () => {
         return fetch(petsUrl)
@@ -99,15 +100,16 @@ class Adopter extends Component {
     //   .then(res => this.setState({
     //     userCoordinates: {res}
         
-    
-
     render () {
         return (
-            <PetCard className="buddy" 
+        <div>
+            <ClippedDrawer />
+            <PetCard className="centered" 
             pet={this.state.currentPet}
             handleLike={this.handleLike}
             handleReject={this.handleReject}
             />
+        </div>
         )
     }
 }  
