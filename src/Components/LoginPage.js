@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import API from '../API'
+import {Redirect} from 'react-router-dom'
+
 
 const styles = theme => ({
   main: {
@@ -52,37 +54,47 @@ class LoginPage extends Component {
     password: null
   }
 
-  { classes, login } = this.props;
-  
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit = () => {
-    this.props.onLogin(this.state);
-  };
+  handleSubmit = (event) => {
+    event.preventDefault()
+    
+    API.login(this.state)
+    
+    .then(data => {
+      if (data.error) {
+        alert("Incorrect Details")
+      } else {
+        this.props.login(data.username)
+      }
+    }) 
+    // this.props.onLogin(this.state);
+  }
 
   render() {
+    console.log(this.state)
     if (this.props.user) return <Redirect to="/adopter" />
 
       return (
-        <main className={classes.main}>
+        <main className={this.props.classes.main}>
           <CssBaseline />
-          <Paper className={classes.paper}>
-            <Avatar className={classes.avatar}>
+          <Paper className={this.props.classes.paper}>
+            <Avatar className={this.props.classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Log in
             </Typography>
-            <Form onSubmit={this.handleSubmit} onChange={this.handleChange} className={classes.form}>
+            <form onSubmit={this.handleSubmit} className={this.props.classes.form}>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="username">Username</InputLabel>
-                <Input id="username" name="username" autoComplete="username" autoFocus />
+                <Input onChange={this.handleChange} id="username" name="username" autoComplete="username" autoFocus />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <Input name="password" type="password" id="password" autoComplete="current-password" />
+                <Input onChange={this.handleChange} name="password" type="password" id="password" autoComplete="current-password" />
               </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -93,16 +105,16 @@ class LoginPage extends Component {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
-                onClick={this.handleSubmit}
+                className={this.props.classes.submit}
+            
               >
                 Log in
               </Button>
-            </Form>
+            </form>
           </Paper>
         </main>
-    }
-  );
+      );
+  }
 }
 
   

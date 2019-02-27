@@ -25,13 +25,14 @@ class App extends Component {
   }
 
   render() {
+    const {login} = this
     return (
       <div className="App">
       
       
       {/* <Navbar className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav"/> */}
       <Switch>
-        {/* <Route path='/login' component={routerProps => <LoginPage login={this.login} {...routerProps} />} /> */}
+        <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/welcome" component={ () => <Welcome />}/>
         <Route path="/adopter" component={props=><Adopter/>}/>
         {/* <Route path="/home" component={props=><Home/>} */}
