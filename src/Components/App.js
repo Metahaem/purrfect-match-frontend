@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import {Route, Switch } from 'react-router-dom'
+import {Route, Switch, Redirect } from 'react-router-dom'
 import Adopter from './Adopter.js'
 import Navbar from './Navbar.js'
 import Welcome from './Welcome.js'
@@ -14,9 +14,8 @@ class App extends Component {
   }
 
   login = username => {
-    console.log("hahaha")
     localStorage.setItem('username', username)
-    this.setState({ username: username })
+    this.setState({ username: username });
   }
 
   logout = username => {
@@ -34,7 +33,7 @@ class App extends Component {
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/welcome" component={ () => <Welcome />}/>
-        <Route path="/adopter" component={props=><Adopter/>}/>
+        <Route path="/adopter" component={routerProps => <Adopter username={this.state.username} {...routerProps}/>}/>
         {/* <Route path="/home" component={props=><Home/>} */}
         <Route component={() => <h1>Page not found.</h1>} />
       </Switch>

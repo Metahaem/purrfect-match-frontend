@@ -1,10 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 const Welcome = () => {
     return (
         <div>
-            <h2>Welcome!></h2>
-            <img className='img-fluid mb-5 d-block mx-auto' src='../cat.png' />
+            <h2>Welcome!</h2>
+            <img src='../cat.png' />
+            <Link to='/login'>Log in</Link>
         </div>
     )
 }

@@ -88,14 +88,19 @@ class Adopter extends Component {
         }
 
     componentDidMount () {
-        this.getPetsFromAPI()
-        .then(allPets => {
-            this.setState({
-            pets: allPets,
-            currentPet: this.randomiseShownPet(allPets)
-          })
-      })
-    }
+        const {history, username} = this.props
+        if (!username) {
+            history.push('/login')
+        }
+        else {
+            this.getPetsFromAPI()
+            .then(allPets => {
+                this.setState({
+                pets: allPets,
+                currentPet: this.randomiseShownPet(allPets)
+                })
+            })}
+        }
     //   .then(() => getCoordinates(this.state.adopter.location))
     //   .then(res => this.setState({
     //     userCoordinates: {res}

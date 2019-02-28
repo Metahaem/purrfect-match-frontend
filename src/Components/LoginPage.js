@@ -68,6 +68,7 @@ class LoginPage extends Component {
         alert("Incorrect Details")
       } else {
         this.props.login(data.username)
+        this.props.history.push("/adopter")
       }
     }) 
     // this.props.onLogin(this.state);
