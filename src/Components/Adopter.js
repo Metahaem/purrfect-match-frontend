@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PetCard from "./PetCard.js"
 import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
+import API from '../API'
 
 
 const baseURL = 'http://localhost:3000/api/v1'
@@ -69,35 +70,26 @@ class Adopter extends Component {
         })
       }
 
-    // getLikesFromAPI = (adopterID) => {
-    //     fetch(baseURL + `/users/${adopterID}likes`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //     const uniqueLikes = [...new Set(data)]
-    //     this.setState({likes: uniqueLikes})
-    //     })
-    // }
-
     randomiseShownPet = (allPets) => {
         return allPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
     }
 
-    getPetsFromAPI = () => {
-        return fetch(petsUrl)
-        .then(res => res.json())
-        }
-
     componentDidMount () {
-        const {history, username} = this.props
-        if (!username) {
+        const {history} = this.props
+        if (!localStorage.token) {
             history.push('/login')
         }
         else {
-            this.getPetsFromAPI()
-            .then(allPets => {
-                this.setState({
-                pets: allPets,
-                currentPet: this.randomiseShownPet(allPets)
+                // API.validate here? Not working
+                fetch ('http://localhost:3000/api/v1/pets', {
+                headers: { 
+                  'content-type': 'application/json', 
+                  'Authorization': localStorage.getItem('token')
+                }}).then(res => res.json()
+                ).then(allPets => {
+                    this.setState({
+                    pets: allPets,
+                    currentPet: this.randomiseShownPet(allPets)
                 })
             })}
         }
@@ -108,7 +100,7 @@ class Adopter extends Component {
     render () {
         return (
         <div>
-            <ClippedDrawer />
+            {/* <ClippedDrawer /> */}
             <PetCard className="centered" 
             pet={this.state.currentPet}
             handleLike={this.handleLike}

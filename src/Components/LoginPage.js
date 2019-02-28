@@ -53,6 +53,7 @@ class LoginPage extends Component {
     username: null,
     password: null
   }
+  
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -60,14 +61,14 @@ class LoginPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    
     API.login(this.state)
-    
     .then(data => {
       if (data.error) {
+        console.log("bad")
         alert("Incorrect Details")
       } else {
-        this.props.login(data.username)
+        console.log("good")
+        this.props.login(data)
         this.props.history.push("/adopter")
       }
     }) 
@@ -75,7 +76,6 @@ class LoginPage extends Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.props.user) return <Redirect to="/adopter" />
 
       return (

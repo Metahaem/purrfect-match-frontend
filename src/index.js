@@ -12,7 +12,7 @@ import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } 
 
 ReactDOM.render(  
   <Router>
-    <App />
+    <App  />
   </Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
