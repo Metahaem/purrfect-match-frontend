@@ -17,7 +17,16 @@ class API {
   }
 
   static getLikes () {
-    fetch ('http://localhost:3000/api/v1/likes', {
+   return fetch ('http://localhost:3000/api/v1/likes', {
+      headers: { 
+        'content-type': 'application/json', 
+        'Authorization': localStorage.getItem('token')
+      }
+    }).then(res => res.json())
+  }
+
+  static getAdopterID () {
+    return fetch ('http://localhost:3000/api/v1/adopter', {
       headers: { 
         'content-type': 'application/json', 
         'Authorization': localStorage.getItem('token')

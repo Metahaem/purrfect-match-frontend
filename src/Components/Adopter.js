@@ -81,21 +81,25 @@ class Adopter extends Component {
         }
         else {
                 // API.validate here? Not working
-                fetch ('http://localhost:3000/api/v1/pets', {
-                headers: { 
-                  'content-type': 'application/json', 
-                  'Authorization': localStorage.getItem('token')
-                }}).then(res => res.json()
-                ).then(allPets => {
-                    this.setState({
-                    pets: allPets,
-                    currentPet: this.randomiseShownPet(allPets)
+                API.getAdopterID()
+                .then(() => {
+                    fetch ('http://localhost:3000/api/v1/pets', {
+                        method: 'GET',
+                        headers: { 
+                            'content-type': 'application/json', 
+                            'Authorization': localStorage.getItem('token')
+                        }})
+                    .then(res => res.json())
+                    .then(allPets => {
+                        this.setState({
+                            pets: allPets,
+                            currentPet: this.randomiseShownPet(allPets)
+                        })
+                    })
                 })
-            })}
-        }
-    //   .then(() => getCoordinates(this.state.adopter.location))
-    //   .then(res => this.setState({
-    //     userCoordinates: {res}
+            }
+    }
+
         
     render () {
         return (
