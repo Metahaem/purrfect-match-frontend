@@ -13,8 +13,9 @@ class Adopter extends Component {
     state = {
         pets: [],
         currentPet: {},
-        adopter: {id: 1},
+        adopterID: null,
         userCoordinates: {},
+        likes: []
         }
 
     // getCoordinates = async (postcode) => {
@@ -38,40 +39,65 @@ class Adopter extends Component {
     //     .then(getCoordinates(this.state.currentPet.location))
     // } 
 
-    
+    addLikeToState = (newLike) => {
+        let likeClone = [...this.state.likes]
+        likeClone.push(newLike)
+        this.setState({
+            likes: likeClone
+        })
+    }
+
+    newPetCard = () => {
+        const newPet = this.randomiseShownPet(this.state.pets)
+        this.setState({currentPet: newPet})
+    }
+
+    createLike = () => {
+        fetch(baseURL + '/likes/create', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            pet_id: this.state.currentPet.id,
+            adopter_id: this.state.adopterID
+          })
+        }).then(res => res.json())
+      }
 
     handleLike = () => {
         console.log("liked!")
-        const targetPetID = this.state.currentPet.id
-        const targetPet = this.state.pets.find(pet => pet.id === targetPetID)
-        // add to likes in state
-        const targetPetIndex = this.state.pets.findIndex(pet => pet.id === targetPetID)
-        // if 
-        console.log(targetPetIndex)
-        this.createLikeInServer()
+        this.createLike()
+        .then((newLike) => this.addLikeToState(newLike))
+        .then(() => this.newPetCard())
     }
 
     handleReject = () => {
         return console.log("rejected!")
     }
 
-    createLikeInServer = () => {
-      
-        fetch(baseURL + '/likes/create', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            pet_id: this.state.currentPet.id,
-            adopter_id: this.state.adopter.id
-          })
-        })
-      }
-
     randomiseShownPet = (allPets) => {
         return allPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
+    }
+
+    setPetsToState = (petData) => {
+        this.setState({
+            pets: petData,
+            currentPet: this.randomiseShownPet(petData)
+        })
+    }
+
+    setAdopterIDToState = (id) => {
+        
+        this.setState({
+            adopterID: id
+        })
+    }
+
+    setLikestoState = () => {
+        API.getLikes().then((likes) => this.setState({likes}))
     }
 
     componentDidMount () {
@@ -82,22 +108,16 @@ class Adopter extends Component {
         else {
                 // API.validate here? Not working
                 API.getAdopterID()
-                .then(() => {
-                    fetch ('http://localhost:3000/api/v1/pets', {
-                        method: 'GET',
-                        headers: { 
-                            'content-type': 'application/json', 
-                            'Authorization': localStorage.getItem('token')
-                        }})
-                    .then(res => res.json())
-                    .then(allPets => {
-                        this.setState({
-                            pets: allPets,
-                            currentPet: this.randomiseShownPet(allPets)
+                .then((id) => this.setAdopterIDToState(id))
+                    .then(() => this.setLikestoState())
+                        .then(() => {
+                            API.getPets()
+                            .then(allPets => {
+                                this.setPetsToState(allPets)
+                            })
                         })
-                    })
-                })
-            }
+
+        }
     }
 
         
