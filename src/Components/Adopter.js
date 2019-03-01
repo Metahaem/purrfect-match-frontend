@@ -83,14 +83,14 @@ class Adopter extends Component {
     }
 
     setPetsToState = (petData) => {
+        const filteredPets = this.filterOutLikedPets(petData)
         this.setState({
-            pets: petData,
-            currentPet: this.randomiseShownPet(petData)
+            pets: filteredPets,
+            currentPet: this.randomiseShownPet(filteredPets)
         })
     }
 
     setAdopterIDToState = (id) => {
-        
         this.setState({
             adopterID: id
         })
@@ -98,6 +98,15 @@ class Adopter extends Component {
 
     setLikestoState = () => {
         API.getLikes().then((likes) => this.setState({likes}))
+    }
+
+    getLikedPetIDs = () => {
+        return this.state.likes.map(like => like.pet_id)
+    }
+
+    filterOutLikedPets = (pets) => {
+        const likedIDs = this.getLikedPetIDs()
+        return pets.filter(pet => !likedIDs.includes(pet.id) )
     }
 
     componentDidMount () {
