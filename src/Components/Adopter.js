@@ -53,7 +53,7 @@ class Adopter extends Component {
     }
 
     createLike = () => {
-        fetch(baseURL + '/likes/create', {
+        return fetch(baseURL + '/likes/create', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -69,7 +69,7 @@ class Adopter extends Component {
 
     handleLike = () => {
         console.log("liked!")
-        this.createLike()
+        return this.createLike()
         .then((newLike) => this.addLikeToState(newLike))
         .then(() => this.newPetCard())
     }
@@ -84,7 +84,7 @@ class Adopter extends Component {
 
     setPetsToState = (petData) => {
         const filteredPets = this.filterOutLikedPets(petData)
-        this.setState({
+        return this.setState({
             pets: filteredPets,
             currentPet: this.randomiseShownPet(filteredPets)
         })
@@ -112,15 +112,15 @@ class Adopter extends Component {
     componentDidMount () {
         const {history} = this.props
         if (!localStorage.token) {
-            history.push('/login')
+            return history.push('/login')
         }
         else {
                 // API.validate here? Not working
-                API.getAdopterID()
+                return API.getAdopterID()
                 .then((id) => this.setAdopterIDToState(id))
                     .then(() => this.setLikestoState())
                         .then(() => {
-                            API.getPets()
+                            return API.getPets()
                             .then(allPets => {
                                 this.setPetsToState(allPets)
                             })
