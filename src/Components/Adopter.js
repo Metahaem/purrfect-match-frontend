@@ -3,6 +3,7 @@ import PetCard from "./PetCard.js"
 import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
+import Grid from '@material-ui/core/Grid'
 
 
 const baseURL = 'http://localhost:3000/api/v1'
@@ -133,12 +134,14 @@ class Adopter extends Component {
     render () {
         return (
         <div>
-            {/* <ClippedDrawer /> */}
+            <Grid container justify="center">
+            <ClippedDrawer likes={this.state.likes}/>
             <PetCard className="centered" 
             pet={this.state.currentPet}
             handleLike={this.handleLike}
             handleReject={this.handleReject}
             />
+            </Grid>
         </div>
         )
     }
