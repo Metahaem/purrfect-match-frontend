@@ -74,7 +74,8 @@ class Adopter extends Component {
     }
 
     handleReject = () => {
-        return console.log("rejected!")
+        console.log("rejected!")
+        return this.newPetCard()
     }
 
 

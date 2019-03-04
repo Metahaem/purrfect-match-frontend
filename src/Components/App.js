@@ -48,7 +48,6 @@ class App extends Component {
       <div className="App">
       <button onClick={this.logout}>Logout</button>
       
-      {/* <Navbar className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav"/> */}
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/welcome" component={ () => <Welcome />}/>
