@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import PetCard from "./PetCard.js"
 import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
 import Grid from '@material-ui/core/Grid'
-
-
-const baseURL = 'http://localhost:3000/api/v1'
-const petsUrl = 'http://localhost:3000/api/v1/pets'
-
+import Navigation from './Navigation'
 
 class Adopter extends Component {
     state = {
@@ -45,8 +40,9 @@ class Adopter extends Component {
     addPetToLikedPets = (pet) => {
         let likeClone = [...this.state.likedPets]
         likeClone.push(pet)
+        const likeSet = Array.from(new Set(likeClone))
         this.setState({
-            likedPets: likeClone
+            likedPets: likeSet
         })
     }
 
@@ -65,7 +61,6 @@ class Adopter extends Component {
 
 
     handleLike = () => {
-        console.log("liked!")
         const targetPet = this.state.currentPet
         this.addPetToLikedPets(targetPet)
         this.removePetFromUnlikedPets(targetPet)
@@ -106,16 +101,6 @@ class Adopter extends Component {
         })
     }
 
-
-    // setLikestoState = () => {
-    //     const liked = this.state.pets.filter(pet => this.singlePetLikedByAdopter(pet))
-    //     return this.setState({likedPets: liked})
-    // }
-
-    // filterOutLikedPets = (pets) => {
-    //     return pets.filter(pet => !this.singlePetLikedByAdopter(pet) )
-    // }
-
     componentDidMount () {
         const {history} = this.props
         if (!localStorage.token || localStorage.token === "undefined") {
@@ -131,17 +116,18 @@ class Adopter extends Component {
         }
     }
 
+    // ------------------ Render function
         
     render () {
         return (
         <div>
             <Grid container justify="center">
-            <ClippedDrawer likedPets={this.state.likedPets}/>
-            <PetCard className="centered" 
-            pet={this.state.currentPet}
-            handleLike={this.handleLike}
-            handleReject={this.handleReject}
-            />
+                <ClippedDrawer likedPets={this.state.likedPets}/>
+                    <Navigation 
+                        currentPets={this.state.currentPet} 
+                        handleLike={this.handleLike}
+                        handleReject={this.handleReject}
+                    />
             </Grid>
         </div>
         )
