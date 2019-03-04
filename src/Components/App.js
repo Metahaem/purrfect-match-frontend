@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import '../App.css';
 import {Route, Switch, Redirect } from 'react-router-dom'
 import Adopter from './Adopter.js'
-import Navbar from './Navbar.js'
 import Welcome from './Welcome.js'
 import LoginPage from './LoginPage.js'
 import { createBrowserHistory } from "history";
-import API from '../API'
 
 
 const history = createBrowserHistory();
