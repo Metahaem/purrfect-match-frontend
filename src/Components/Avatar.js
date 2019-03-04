@@ -16,10 +16,10 @@ const styles = {
 };
 
 function ImageAvatar(props) {
-  const { classes, like } = props;
+  const { classes, photo } = props;
   return (
     <Grid container justify="center" alignItems="center">
-      <Avatar alt="Animal Avatar" src={like.pet.photo} className={classes.avatar} />
+      <Avatar alt="Animal Avatar" src={photo} className={classes.avatar} />
     </Grid>
   );
 }

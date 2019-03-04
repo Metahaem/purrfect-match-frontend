@@ -38,6 +38,21 @@ class API {
     }).then(res => res.json())
   }
 
+  static createLike = (state) => {
+    return fetch(baseURL + '/likes/create', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        pet_id: state.currentPet.id,
+        adopter_id: state.adopterID
+      })
+    }).then(res => res.json())
+  }
+
   static getAdopterID () {
     return fetch ('http://localhost:3000/api/v1/adopter', {
       headers: { 

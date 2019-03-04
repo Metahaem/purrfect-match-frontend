@@ -11,8 +11,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import ImageAvatar from './Avatar'
 
 const drawerWidth = 240;
@@ -61,11 +59,11 @@ function ClippedDrawer(props) {
       <div className={classes.toolbar} />
         <List>
           {likes.map((like) => (
-            <ListItem >
+            <ListItem key={like.id}>
               <ListItemIcon>
-                <ImageAvatar like={like}/>
+                <ImageAvatar photo={like.photo}/>
               </ListItemIcon>
-              <ListItemText primary={like.pet.name} />
+              <ListItemText primary={like.name} />
             </ListItem>
           ))}
         </List>
@@ -79,4 +77,4 @@ ClippedDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ClippedDrawer);
+export default withStyles(styles)(ClippedDrawer)
