@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import {Route, Switch, Redirect } from 'react-router-dom'
 import Adopter from './Adopter.js'
-import Navbar from './Navbar.js'
 import Welcome from './Welcome.js'
 import LoginPage from './LoginPage.js'
 import { createBrowserHistory } from "history";
@@ -48,7 +47,6 @@ class App extends Component {
       <div className="App">
       <button onClick={this.logout}>Logout</button>
       
-      {/* <Navbar className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav"/> */}
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/welcome" component={ () => <Welcome />}/>

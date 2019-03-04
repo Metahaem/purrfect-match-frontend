@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Swiper from 'react-id-swiper';
 import PetCard from "./PetCard.js"
+import './Navigation.css';
 
 
 class Navigation extends Component {
@@ -15,7 +16,6 @@ class Navigation extends Component {
     return (
       <Swiper {...params}>
             <PetCard 
-                className="centered" 
                 pet={this.props.currentPet}
                 handleLike={this.props.handleLike}
                 handleReject={this.props.handleReject}
