@@ -125,7 +125,7 @@ class Adopter extends Component {
                 <ClippedDrawer likedPets={this.state.likedPets}/>
                     <Navigation 
                         className="centered" 
-                        currentPet={this.state.currentPet} 
+                        pets={this.state.unlikedPets} 
                         handleLike={this.handleLike}
                         handleReject={this.handleReject}
                     />
