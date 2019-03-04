@@ -14,6 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import API from '../API'
 import {Redirect} from 'react-router-dom'
+import ImageAvatar from './Avatar'
+import cat from '../cat.png'
+
 
 
 const styles = theme => ({
@@ -82,9 +85,7 @@ class LoginPage extends Component {
         <main className={this.props.classes.main}>
           <CssBaseline />
           <Paper className={this.props.classes.paper}>
-            <Avatar className={this.props.classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <ImageAvatar photo={cat}/>
             <Typography component="h1" variant="h5">
               Log in
             </Typography>
