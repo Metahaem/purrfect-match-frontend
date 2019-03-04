@@ -37,7 +37,7 @@ const styles = theme => ({
 });
 
 function ClippedDrawer(props) {
-  const { classes, likes } = props;
+  const { classes, likedPets } = props;
 
   return (
     <div className={classes.root}>
@@ -58,12 +58,12 @@ function ClippedDrawer(props) {
       >
       <div className={classes.toolbar} />
         <List>
-          {likes.map((like) => (
-            <ListItem key={like.id}>
+          {likedPets.map((pet) => (
+            <ListItem key={pet.id}>
               <ListItemIcon>
-                <ImageAvatar photo={like.photo}/>
+                <ImageAvatar photo={pet.photo}/>
               </ListItemIcon>
-              <ListItemText primary={like.name} />
+              <ListItemText primary={pet.name} />
             </ListItem>
           ))}
         </List>

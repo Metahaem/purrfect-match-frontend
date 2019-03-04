@@ -38,7 +38,7 @@ class API {
     }).then(res => res.json())
   }
 
-  static createLike = (state) => {
+  static createLike = (petID, adopterID) => {
     return fetch(baseURL + '/likes/create', {
       method: 'POST',
       headers: {
@@ -47,8 +47,8 @@ class API {
         'Authorization': localStorage.getItem('token')
       },
       body: JSON.stringify({
-        pet_id: state.currentPet.id,
-        adopter_id: state.adopterID
+        pet_id: petID,
+        adopter_id: adopterID
       })
     }).then(res => res.json())
   }

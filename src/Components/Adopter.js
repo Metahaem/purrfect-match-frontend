@@ -12,13 +12,12 @@ const petsUrl = 'http://localhost:3000/api/v1/pets'
 
 class Adopter extends Component {
     state = {
-        pets: [],
+        likedPets: [],
+        unlikedPets: [],
         currentPet: {},
         adopterID: null,
         userCoordinates: {},
         }
-
-    likedPets = this.state.pets.filter(pet => this.singlePetLikedByAdopter(pet))
 
     // getCoordinates = async (postcode) => {
     //     let coordinates = null
@@ -43,11 +42,19 @@ class Adopter extends Component {
 
     // -------------------------Like functionality
 
-    addLikeToState = (pet) => {
+    addPetToLikedPets = (pet) => {
         let likeClone = [...this.state.likedPets]
         likeClone.push(pet)
         this.setState({
             likedPets: likeClone
+        })
+    }
+
+    removePetFromUnlikedPets = (pet) => {
+        let unlikeClone = [...this.state.unlikedPets]
+        unlikeClone.filter(eachPet => eachPet.id !== pet.id)
+        this.setState({
+            unlikedPets: unlikeClone
         })
     }
 
@@ -59,9 +66,11 @@ class Adopter extends Component {
 
     handleLike = () => {
         console.log("liked!")
-        this.addLikeToState(this.state.currentPet)
+        const targetPet = this.state.currentPet
+        this.addPetToLikedPets(targetPet)
+        this.removePetFromUnlikedPets(targetPet)
         this.newPetCard()
-        API.createLike(this.state)
+        API.createLike(targetPet.id, this.state.adopterID)
     }
 
     handleReject = () => {
@@ -71,30 +80,28 @@ class Adopter extends Component {
 
     // -------------------------Card functionality
 
-    randomiseShownPet = (allPets) => {
-        const unlikedPets = allPets.filter(pet => !this.singlePetLikedByAdopter(pet) )
-        return unlikedPets[Math.round(Math.random(this.state.pets.length - 1 )*10)]
+    newPetCard = () => {
+        const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
+        this.setState({currentPet: newPet})
     }
 
     //-----------------Like filtering
 
     singlePetLikedByAdopter = (pet) => {
-        return pet.likes.find(like => like.adopter_id === this.state.adopterID).length > 0
+        return pet.likes.find(like => like.adopter_id === this.state.adopterID)
     }
     
 
-    
-    
     // ------------------------ Page load functionality
     setPetsToState = (petData) => {
-        return this.setState({
-            pets: petData,
-            currentPet: this.randomiseShownPet(petData)
+        this.setState({
+            unlikedPets: petData.filter(pet => !this.singlePetLikedByAdopter(pet)),
+            likedPets: petData.filter(pet => this.singlePetLikedByAdopter(pet))
         })
     }
 
     setAdopterIDToState = (id) => {
-        this.setState({
+        return this.setState({
             adopterID: id
         })
     }
@@ -117,9 +124,10 @@ class Adopter extends Component {
         else {
                 // API.validate here? Not working
                 return API.getAdopterID()
-                .then((id) => this.setAdopterIDToState(id))
+                .then(id => this.setAdopterIDToState(id))
                 .then(() => API.getPets())
                 .then(allPets => this.setPetsToState(allPets))
+                .then(() => this.newPetCard())
         }
     }
 
@@ -128,7 +136,7 @@ class Adopter extends Component {
         return (
         <div>
             <Grid container justify="center">
-            <ClippedDrawer likes={this.likedPets}/>
+            <ClippedDrawer likedPets={this.state.likedPets}/>
             <PetCard className="centered" 
             pet={this.state.currentPet}
             handleLike={this.handleLike}
