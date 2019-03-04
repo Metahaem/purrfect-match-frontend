@@ -45,8 +45,9 @@ class Adopter extends Component {
     addPetToLikedPets = (pet) => {
         let likeClone = [...this.state.likedPets]
         likeClone.push(pet)
+        const likeSet = Array.from(new Set(likeClone))
         this.setState({
-            likedPets: likeClone
+            likedPets: likeSet
         })
     }
 
@@ -105,16 +106,6 @@ class Adopter extends Component {
             adopterID: id
         })
     }
-
-
-    // setLikestoState = () => {
-    //     const liked = this.state.pets.filter(pet => this.singlePetLikedByAdopter(pet))
-    //     return this.setState({likedPets: liked})
-    // }
-
-    // filterOutLikedPets = (pets) => {
-    //     return pets.filter(pet => !this.singlePetLikedByAdopter(pet) )
-    // }
 
     componentDidMount () {
         const {history} = this.props
