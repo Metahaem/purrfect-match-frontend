@@ -1,5 +1,4 @@
 const baseURL = 'http://localhost:3000/api/v1'
-const petsUrl = 'http://localhost:3000/api/v1/pets'
 
 class API {
   static login(user) {

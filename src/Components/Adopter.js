@@ -124,7 +124,6 @@ class Adopter extends Component {
             <Grid container justify="center">
                 <ClippedDrawer likedPets={this.state.likedPets}/>
                     <Navigation 
-                        className="centered" 
                         pets={this.state.unlikedPets} 
                         handleLike={this.handleLike}
                         handleReject={this.handleReject}

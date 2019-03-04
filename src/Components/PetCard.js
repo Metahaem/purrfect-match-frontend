@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react'
-import {Route, Link } from 'react-router-dom'
+import {Link } from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+
 // import PropTypes from 'prop-types';
 // import { withStyles } from '@material-ui/core/styles';
 // import classnames from 'classnames';
@@ -154,7 +156,8 @@ const PetCard = ({pet, handleLike, handleReject}) => {
   }
 
   return (
-    <div className="buddy">
+    <div>
+    <Grid container justify="center">
     <Card>
       <Image src={pet.photo} />
       <Card.Content>
@@ -182,6 +185,7 @@ const PetCard = ({pet, handleLike, handleReject}) => {
           <Button circular color='green' icon='heart' onClick={handleLike} />
       </Button.Group>
     </Card>
+    </Grid>
     </div> 
     
     )
