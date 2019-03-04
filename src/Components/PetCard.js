@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react'
-import {Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types';
 // import { withStyles } from '@material-ui/core/styles';
 // import classnames from 'classnames';

@@ -1,5 +1,30 @@
+
+
+body {
+  background-color: #18BC9C;
+  font-size: 12px;
+	font-family: 'Open Sans', sans-serif;
+	color: #ffffff;
+}
+
 .App {
   text-align: center;
+}
+
+.bg-primary {
+  background-color: #18BC9C;
+}
+
+.bg-secondary {
+  background-color: #2C3E50;
+}
+
+.text-primary {
+  color: #18BC9C !important;
+}
+
+.text-secondary {
+  color: #2C3E50 !important;
 }
 
 .App-logo {
@@ -378,21 +403,7 @@ a:focus, a:hover, a:active {
   border-width: 2px;
 }
 
-.bg-primary {
-  background-color: #18BC9C !important;
-}
 
-.bg-secondary {
-  background-color: #2C3E50 !important;
-}
-
-.text-primary {
-  color: #18BC9C !important;
-}
-
-.text-secondary {
-  color: #2C3E50 !important;
-}
 
 .btn-primary {
   background-color: #18BC9C;

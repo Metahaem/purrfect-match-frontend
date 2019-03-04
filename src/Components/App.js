@@ -48,7 +48,7 @@ class App extends Component {
       
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
-        <Route path="/welcome" component={ () => <Welcome />}/>
+        <Route path="/welcome" component={ routerProps => <Welcome login={login} {...routerProps}/>}/>
         <Route path="/adopter" component={routerProps => <Adopter login={login} username={this.state.username} {...routerProps}/>}/>
         {/* <Route path="/home" component={props=><Home/>} */}
         <Route component={() => <h1>Page not found.</h1>} />
