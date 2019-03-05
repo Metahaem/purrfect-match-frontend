@@ -74,7 +74,10 @@ class Adopter extends Component {
     handleLike = () => {
         console.log("liked!")
         const targetPet = this.state.currentPet
-        this.setState({likeOrReject: 'like', visible: false})
+        this.setState({
+            likeOrReject: 'like',
+            visible: false
+        })
         this.addPetToLikedPets(targetPet)
         this.removePetFromUnlikedPets(targetPet)
         this.newPetCard()
@@ -95,12 +98,9 @@ class Adopter extends Component {
 
     newPetCard = () => {
         const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
-        this.setState({currentPet: newPet})
+        this.setState({currentPet: newPet, visible: true})
     }
 
-    animation = () => {
-
-    }
 
     //-----------------Like filtering
 
@@ -123,16 +123,6 @@ class Adopter extends Component {
         })
     }
 
-
-    // setLikestoState = () => {
-    //     const liked = this.state.pets.filter(pet => this.singlePetLikedByAdopter(pet))
-    //     return this.setState({likedPets: liked})
-    // }
-
-    // filterOutLikedPets = (pets) => {
-    //     return pets.filter(pet => !this.singlePetLikedByAdopter(pet) )
-    // }
-
     componentDidMount () {
         const {history} = this.props
         if (!localStorage.token || localStorage.token === "undefined") {
@@ -150,7 +140,7 @@ class Adopter extends Component {
 
         
     render () {
-        const { currentPet, handleLike, handleReject, visible, likeOrReject, likedPets } = this.state
+        const { currentPet, visible, likeOrReject, likedPets } = this.state
         return (
         <div>
             <Grid container justify="center">
@@ -159,8 +149,8 @@ class Adopter extends Component {
                     {visible && <PetCard 
                         className="ui middle aligned centered" 
                         pet={currentPet}
-                        handleLike={handleLike}
-                        handleReject={handleReject}
+                        handleLike={this.handleLike}
+                        handleReject={this.handleReject}
                      />}
                 </Transition.Group>
             </Grid>
