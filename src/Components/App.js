@@ -17,14 +17,12 @@ class App extends Component {
 
   login = user => {
     localStorage.setItem('token', user.token)
-    // localStorage.setItem('username', user.username)
     this.setState({ username: user.username });
 
   }
 
   logout = () => {
     localStorage.removeItem('token')
-    // localStorage.removeItem('username')
     this.setState({ username: '' })
   }
 

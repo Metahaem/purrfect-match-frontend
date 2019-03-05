@@ -4,20 +4,18 @@ import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
 import Grid from '@material-ui/core/Grid'
-import { Card, Button, Icon, Image } from 'semantic-ui-react'
-
-
-const baseURL = 'http://localhost:3000/api/v1'
-const petsUrl = 'http://localhost:3000/api/v1/pets'
-
+import { Transition } from 'semantic-ui-react'
 
 class Adopter extends Component {
     state = {
         likedPets: [],
         unlikedPets: [],
         currentPet: {},
+        rejectedPets: [],
         adopterID: null,
         userCoordinates: {},
+        likeOrReject: null,
+        visible: true
         }
 
     // getCoordinates = async (postcode) => {
@@ -51,6 +49,14 @@ class Adopter extends Component {
         })
     }
 
+    addPetToRejectedPets = (pet) => {
+        let rejectedClone = [...this.state.rejectedPets]
+        rejectedClone.push(pet)
+        this.setState({
+            rejectedPets: rejectedClone
+        })
+    }
+
     removePetFromUnlikedPets = (pet) => {
         let unlikeClone = [...this.state.unlikedPets]
         unlikeClone.filter(eachPet => eachPet.id !== pet.id)
@@ -68,6 +74,7 @@ class Adopter extends Component {
     handleLike = () => {
         console.log("liked!")
         const targetPet = this.state.currentPet
+        this.setState({likeOrReject: 'like', visible: false})
         this.addPetToLikedPets(targetPet)
         this.removePetFromUnlikedPets(targetPet)
         this.newPetCard()
@@ -76,7 +83,11 @@ class Adopter extends Component {
 
     handleReject = () => {
         console.log("rejected!")
-        return this.newPetCard()
+        const targetPet = this.state.currentPet
+        this.setState({likeOrReject: 'reject', visible: false})
+        this.addPetToRejectedPets(targetPet)
+        this.removePetFromUnlikedPets(targetPet)
+        this.newPetCard()
     }
 
 
@@ -85,6 +96,10 @@ class Adopter extends Component {
     newPetCard = () => {
         const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
         this.setState({currentPet: newPet})
+    }
+
+    animation = () => {
+
     }
 
     //-----------------Like filtering
@@ -135,15 +150,19 @@ class Adopter extends Component {
 
         
     render () {
+        const { currentPet, handleLike, handleReject, visible, likeOrReject, likedPets } = this.state
         return (
         <div>
             <Grid container justify="center">
-            <ClippedDrawer likedPets={this.state.likedPets}/>
-            <PetCard className="ui middle aligned centered" 
-            pet={this.state.currentPet}
-            handleLike={this.handleLike}
-            handleReject={this.handleReject}
-            />
+                <ClippedDrawer likedPets={likedPets}/>
+                <Transition.Group animation={likeOrReject == 'like' ? 'slide right' : 'slide left'} duration={500}>
+                    {visible && <PetCard 
+                        className="ui middle aligned centered" 
+                        pet={currentPet}
+                        handleLike={handleLike}
+                        handleReject={handleReject}
+                     />}
+                </Transition.Group>
             </Grid>
         </div>
         )
@@ -151,3 +170,4 @@ class Adopter extends Component {
 }  
 
 export default Adopter
+
