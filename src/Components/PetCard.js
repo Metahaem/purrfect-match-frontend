@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import {Route, Link } from 'react-router-dom'
 // import PropTypes from 'prop-types';
 // import { withStyles } from '@material-ui/core/styles';
 // import classnames from 'classnames';
@@ -157,6 +157,11 @@ const PetCard = ({pet, handleLike, handleReject}) => {
     <div className="buddy">
     <Card>
       <Image src={pet.photo} />
+      <Button.Group size='large'>
+          <Button circular color='red' icon='close' onClick={handleReject} />
+          <Button.Or />
+          <Button circular color='green' icon='heart' onClick={handleLike} />
+      </Button.Group>
       <Card.Content>
         <Card.Header>{pet.name}</Card.Header>
         <Card.Meta>
@@ -168,7 +173,7 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         <Card.Meta> 
           <span className='date'>Age: {pet.age}</span>
         </Card.Meta>
-        <Card.Description>{shortenedDescription(pet.description)}</Card.Description>
+        <Card.Description>{true ? pet.description : shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Link to={`/pets/${pet.id}`}>
@@ -176,11 +181,6 @@ const PetCard = ({pet, handleLike, handleReject}) => {
           See more about {pet.name}!
         </Link>
       </Card.Content>
-      <Button.Group size='large'>
-          <Button className="ui circular" color='red' icon='close' onClick={handleReject} />
-          <Button.Or />
-          <Button className="ui circular" color='green' icon='heart' onClick={handleLike} />
-      </Button.Group>
     </Card>
     </div> 
     

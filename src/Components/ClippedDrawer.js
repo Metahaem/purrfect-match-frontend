@@ -4,14 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ImageAvatar from './Avatar'
+
+import Navbar from './Navbar'
+import Petsnip from './Petsnip'
 
 const drawerWidth = 240;
 
@@ -43,11 +41,7 @@ function ClippedDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h4" color="inherit" noWrap>
-            Purrfect Match
-          </Typography>
-        </Toolbar>
+        <Navbar />
       </AppBar>
       <Drawer
         className={classes.drawer}
@@ -58,13 +52,8 @@ function ClippedDrawer(props) {
       >
       <div className={classes.toolbar} />
         <List>
-          {likedPets.map((pet) => (
-            <ListItem key={pet.id}>
-              <ListItemIcon>
-                <ImageAvatar photo={pet.photo}/>
-              </ListItemIcon>
-              <ListItemText primary={pet.name} />
-            </ListItem>
+          {likedPets.map(pet => (
+            <Petsnip pet={pet} />
           ))}
         </List>
         <Divider />

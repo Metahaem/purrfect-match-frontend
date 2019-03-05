@@ -59,9 +59,9 @@ class Adopter extends Component {
 
     removePetFromUnlikedPets = (pet) => {
         let unlikeClone = [...this.state.unlikedPets]
-        unlikeClone.filter(eachPet => eachPet.id !== pet.id)
+        const filteredList = unlikeClone.filter(eachPet => eachPet.id !== pet.id)
         this.setState({
-            unlikedPets: unlikeClone
+            unlikedPets: filteredList
         })
     }
 
@@ -146,12 +146,13 @@ class Adopter extends Component {
             <Grid container justify="center">
                 <ClippedDrawer likedPets={likedPets}/>
                 <Transition.Group animation={likeOrReject == 'like' ? 'slide right' : 'slide left'} duration={500}>
-                    {visible && <PetCard 
+                    <PetCard 
                         className="ui middle aligned centered" 
+                        style='padding-top: 89px'
                         pet={currentPet}
                         handleLike={this.handleLike}
                         handleReject={this.handleReject}
-                     />}
+                     />
                 </Transition.Group>
             </Grid>
         </div>

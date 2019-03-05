@@ -38,6 +38,8 @@ class App extends Component {
     this.setState({ username: '' })
   }
 
+
+
 // componentDidMount () {
 //   API.validate()
 //   .then(data => {
@@ -54,13 +56,13 @@ class App extends Component {
   render() {
     const {login} = this
     return (
-      <div className="App body">
+      <div className='bg text-white mb-0'>
       <Navbar />
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
-        {/* <Route path="/welcome" component={ routerProps => <Welcome login={login} {...routerProps}/>}/> */}
         <Route path="/adopter" component={routerProps => <Adopter login={login} username={this.state.username} {...routerProps}/>}/>
         <Route path="/homeoradopt" component={routerProps => <HomeOrAdopt {...routerProps}/>}/>
+        {/* <Route path={`pets/${pet.id}`} component={routerProps => <PetInfo pet={pet} {...routerProps} />} /> */}
         {/* <Route path="/home" component={props=><Home/>} */}
         <Route component={() => <h1>Page not found.</h1>} />
       </Switch>
