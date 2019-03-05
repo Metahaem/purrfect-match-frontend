@@ -145,18 +145,9 @@ class LoginPage extends Component {
             </Grid>
             </div>
         )
-        {/* <a onClick={this.scrollToTop}>To the top!</a> */}
     }
 }
-//         <main className={this.props.classes.main}>
-//           <CssBaseline />
 
-//         </main>
-//       )
-//   }
-// }
-
-  
   LoginPage.propTypes = {
     classes: PropTypes.object.isRequired,
   };
