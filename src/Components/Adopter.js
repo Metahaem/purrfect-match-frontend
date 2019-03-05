@@ -4,6 +4,7 @@ import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
 import Grid from '@material-ui/core/Grid'
+import { Card, Button, Icon, Image } from 'semantic-ui-react'
 
 
 const baseURL = 'http://localhost:3000/api/v1'
@@ -138,7 +139,7 @@ class Adopter extends Component {
         <div>
             <Grid container justify="center">
             <ClippedDrawer likedPets={this.state.likedPets}/>
-            <PetCard className="centered" 
+            <PetCard className="ui middle aligned centered" 
             pet={this.state.currentPet}
             handleLike={this.handleLike}
             handleReject={this.handleReject}

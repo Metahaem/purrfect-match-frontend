@@ -4,6 +4,7 @@ import {Route, Switch, Redirect } from 'react-router-dom'
 import Adopter from './Adopter.js'
 import Welcome from './Welcome.js'
 import LoginPage from './LoginPage.js'
+import HomeOrAdopt from './HomeOrAdopt'
 import { createBrowserHistory } from "history";
 
 
@@ -43,13 +44,14 @@ class App extends Component {
   render() {
     const {login} = this
     return (
-      <div className="App">
+      <div className="App body">
       <button onClick={this.logout}>Logout</button>
       
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/welcome" component={ routerProps => <Welcome login={login} {...routerProps}/>}/>
         <Route path="/adopter" component={routerProps => <Adopter login={login} username={this.state.username} {...routerProps}/>}/>
+        <Route path="/homeoradopt" component={routerProps => <HomeOrAdopt {...routerProps}/>}/>
         {/* <Route path="/home" component={props=><Home/>} */}
         <Route component={() => <h1>Page not found.</h1>} />
       </Switch>

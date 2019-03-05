@@ -168,7 +168,7 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         <Card.Meta> 
           <span className='date'>Age: {pet.age}</span>
         </Card.Meta>
-        <Card.Description>{true ? pet.description : shortenedDescription(pet.description)}</Card.Description>
+        <Card.Description>{shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <Link to={`/pets/${pet.id}`}>
@@ -177,9 +177,9 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         </Link>
       </Card.Content>
       <Button.Group size='large'>
-          <Button circular color='red' icon='close' onClick={handleReject} />
+          <Button className="ui circular" color='red' icon='close' onClick={handleReject} />
           <Button.Or />
-          <Button circular color='green' icon='heart' onClick={handleLike} />
+          <Button className="ui circular" color='green' icon='heart' onClick={handleLike} />
       </Button.Group>
     </Card>
     </div> 
