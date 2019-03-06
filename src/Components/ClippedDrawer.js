@@ -2,17 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import '../vendor/fontawesome-free/css/all.min.css'
+import './Navbar.css';
+import '../App.css'
+
+import 'bootstrap/dist/css/bootstrap.css';
+import './Navbar.css';
+import '../scss/freelancer.scss';
+import '../vendor/bootstrap/css/bootstrap.min.css'
+import '../vendor/fontawesome-free/css/all.min.css'
+import '../vendor/magnific-popup/magnific-popup.css'
+import '../css/freelancer.min.css'
 
 
 import Navbar from './Navbar'
 import Petsnip from './Petsnip'
 
-const drawerWidth = 240;
+const drawerWidth = 340;
+
 
 const styles = theme => ({
   root: {
@@ -27,6 +38,8 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: '#2C3E50',
+
   },
   content: {
     flexGrow: 1,
@@ -41,9 +54,6 @@ function ClippedDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Navbar />
-      </AppBar>
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -52,6 +62,7 @@ function ClippedDrawer(props) {
         }}
       >
       <div className={classes.toolbar} />
+      <div className='navbar-brand'>Your Selections</div>
         <List>
           {likedPets.map(pet => (
             <Petsnip pet={pet} />

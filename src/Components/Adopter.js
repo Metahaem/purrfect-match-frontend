@@ -15,7 +15,7 @@ class Adopter extends Component {
         adopterID: null,
         userCoordinates: {},
         likeOrReject: null,
-        visible: true
+
         }
 
     // getCoordinates = async (postcode) => {
@@ -76,7 +76,6 @@ class Adopter extends Component {
         const targetPet = this.state.currentPet
         this.setState({
             likeOrReject: 'like',
-            visible: false
         })
         this.addPetToLikedPets(targetPet)
         this.removePetFromUnlikedPets(targetPet)
@@ -87,7 +86,7 @@ class Adopter extends Component {
     handleReject = () => {
         console.log("rejected!")
         const targetPet = this.state.currentPet
-        this.setState({likeOrReject: 'reject', visible: false})
+        this.setState({likeOrReject: 'reject'})
         this.addPetToRejectedPets(targetPet)
         this.removePetFromUnlikedPets(targetPet)
         this.newPetCard()
@@ -98,7 +97,7 @@ class Adopter extends Component {
 
     newPetCard = () => {
         const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
-        this.setState({currentPet: newPet, visible: true})
+        this.setState({currentPet: newPet})
     }
 
 
@@ -107,6 +106,8 @@ class Adopter extends Component {
     singlePetLikedByAdopter = (pet) => {
         return pet.likes.find(like => like.adopter_id === this.state.adopterID)
     }
+
+
     
 
     // ------------------------ Page load functionality
@@ -140,19 +141,19 @@ class Adopter extends Component {
 
         
     render () {
-        const { currentPet, visible, likeOrReject, likedPets } = this.state
+        const { currentPet, likeOrReject, likedPets } = this.state
         return (
         <div>
             <Grid container justify="center">
-                <ClippedDrawer likedPets={likedPets}/>
-                <Transition.Group animation={likeOrReject == 'like' ? 'slide right' : 'slide left'} duration={500}>
+            <ClippedDrawer likedPets={likedPets}/>
+                <Grid item justify="center">
                     <PetCard 
                         className="ui middle aligned centered" 
                         pet={currentPet}
                         handleLike={this.handleLike}
                         handleReject={this.handleReject}
                      />
-                </Transition.Group>
+                </Grid>
             </Grid>
         </div>
         )

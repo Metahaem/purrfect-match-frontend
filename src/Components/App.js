@@ -7,6 +7,7 @@ import HomeOrAdopt from './HomeOrAdopt'
 import { createBrowserHistory } from "history";
 import { createMuiTheme } from '@material-ui/core/styles';
 import Navbar from './Navbar'
+import '../vendor/fontawesome-free/css/all.min.css'
 
 
 const history = createBrowserHistory();
@@ -24,8 +25,12 @@ const theme = createMuiTheme({
 
 class App extends Component {
   state = {
-    username: ''
+    username: '',
+    filtersVisible: false,
+    filters: null,
+    adopterOrHome: null
   }
+ 
 
   login = user => {
     localStorage.setItem('token', user.token)
@@ -38,35 +43,47 @@ class App extends Component {
     this.setState({ username: '' })
   }
 
+    // ----------------------Filters
+    
+  toggleFilterMenu = () => {
+    const newState = !this.state.filtersVisible
+    this.setState({filtersVisible: newState})
+  }
 
-
-// componentDidMount () {
-//   API.validate()
-//   .then(data => {
-//     if (data.error) {
-//       this.logout()
-//     } else {
-//       this.login(data.username)
-//       history.push("/adopter")
-//     }
-//   }) 
-// }
-// WHY ARE WE VALIDATING ON MOUNT
+  setFilters = (object) => this.setState({filters: object})
 
   render() {
     const {login} = this
     return (
       <div className='bg text-white mb-0'>
-      <Navbar />
-      <Switch>
-        <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
-        <Route path="/adopter" component={routerProps => <Adopter login={login} username={this.state.username} {...routerProps}/>}/>
-        <Route path="/homeoradopt" component={routerProps => <HomeOrAdopt {...routerProps}/>}/>
-        {/* <Route path={`pets/${pet.id}`} component={routerProps => <PetInfo pet={pet} {...routerProps} />} /> */}
-        {/* <Route path="/home" component={props=><Home/>} */}
-        <Route component={() => <h1>Page not found.</h1>} />
-      </Switch>
-      <button onClick={this.logout}>Logout</button>
+        <Navbar 
+          filtersVisible={this.state.filterMenu} 
+          filters={this.state.filters} 
+          toggleFilterMenu={this.toggleFilterMenu} 
+          setFilters={this.state.setFilters}
+        />
+
+        <Switch>
+
+          <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
+
+          <Route path="/adopter" component={routerProps => 
+            <Adopter 
+              login={login} 
+              username={this.state.username} 
+              filters={this.state.filters} 
+              {...routerProps}/>}/>
+
+          <Route path="/homeoradopt" component={routerProps => <HomeOrAdopt {...routerProps}/>}/>
+          {/* <Route path={`pets/${pet.id}`} component={routerProps => <PetInfo pet={pet} {...routerProps} />} /> */}
+          {/* <Route path="/home" component={props=><Home/>} */}
+
+          <Route component={() => <h1>Page not found.</h1>} />
+
+        </Switch>
+
+        <button onClick={this.logout}>Logout</button>
+
       </div>
     )
   }
