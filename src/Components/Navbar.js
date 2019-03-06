@@ -6,6 +6,7 @@ import '../vendor/bootstrap/css/bootstrap.min.css'
 import '../vendor/fontawesome-free/css/all.min.css'
 import '../vendor/magnific-popup/magnific-popup.css'
 import '../css/freelancer.min.css'
+import {Button} from 'semantic-ui-react'
 import ImageAvatar from './Avatar'
 import cat from '../cat.png'
 import Grid from '@material-ui/core/Grid'
@@ -36,17 +37,20 @@ const Navbar = (props) => {
           <ul className="navbar-nav ml-auto">
           <Grid item xs={12}> 
             <li className="nav-item mx-0 mx-lg-1">
+            
             <Filters 
               filtersVisible={props.filterMenu} 
               filters={props.filters} 
               setFilters={props.setFilters}
-              handleChange={props.handleChange}
+              changeAppState={props.changeAppState}
             />
             </li>
             </Grid>
             <Grid item xs={12}> 
             <li className="nav-item mx-0 mx-lg-1">
-              <a className="nav-link py-3 px-0 px-lg-3" href="#log-in">Log Out</a>
+              <Button onClick={props.logout}>
+                Log Out
+              </Button>
             </li>
             </Grid>
           </ul>

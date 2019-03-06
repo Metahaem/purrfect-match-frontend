@@ -38,7 +38,7 @@ class Filters extends React.Component {
     
       
   render() {
-    const { classes, handleChange } = this.props;
+    const { classes, filters } = this.props;
     const { open } = this.state;
 
     return (
@@ -65,7 +65,7 @@ class Filters extends React.Component {
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList>
-                      <FilterDropdown handleChange={handleChange}/>
+                      <FilterDropdown filters={filters} changeAppState={this.props.changeAppState}/>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

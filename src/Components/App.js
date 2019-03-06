@@ -47,23 +47,22 @@ class App extends Component {
     
   setFilters = (object) => this.setState({filters: object})
 
-  handleChange = key => (event, value) => {
-    this.setState({
-      filters: {[key]: value}
-    });
-  };
+  changeAppState = (selectedFilters) => {
+    console.log(selectedFilters)
+    this.setState({filters: selectedFilters})
+  }
 
-  // ------------------Render 
+  // ---------------------Render
 
   render() {
     const {login} = this
     return (
       <div className='bg text-white mb-0'>
         <Navbar 
-          filtersVisible={this.state.filterMenu} 
           filters={this.state.filters} 
           setFilters={this.state.setFilters}
-          handleChange={this.handleChange}
+          changeAppState={this.changeAppState}
+          logout={this.logout}
         />
 
         <Switch>

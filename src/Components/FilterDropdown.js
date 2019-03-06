@@ -25,21 +25,48 @@ const styles = theme => ({
   },
 });
 
+
 class FilterDropdown extends React.Component {
     state = {
-        maxAge: 40,
-        minAge: 0,
-        catOrDog: "Both",
-        colours: '' ,
-        open: false
-      }
+        filters: {
+            maxAge: 40,
+            minAge: 0,
+            catOrDog: "Both",
+            colours: '' ,
+            open: false
+        }
+    }
+
+  handleChange = key => (event, value) => {
+      let filterClone = {...this.state.filters}
+      filterClone[key] = value
+        this.setState({
+          filters: filterClone
+        }, () => {
+            if (this.state.filters) { 
+                this.props.changeAppState(this.state.filters) 
+            }
+        });
+        
+        // debugger
+        
+    }
+    // this.props.changeAppState(this.state.filters)
+
 
   handleDeleteExample = () => {
     alert('You clicked the delete icon.'); // eslint-disable-line no-alert
   };
 
+  componentDidMount () {
+      if (this.props.filters) {
+        return this.setState({filters: this.props.filters})
+      }
+    }
+
+
   render() {
-    const { classes, handleChange } = this.props;
+    const { classes } = this.props;
     const { maxAge, minAge, catOrDog, colours } = this.state;
 
     return (
@@ -56,7 +83,7 @@ class FilterDropdown extends React.Component {
                     name="catOrDog"
                     aria-label="catOrDog"
                     value={catOrDog}
-                    onChange={handleChange('catOrDog')}
+                    onChange={this.handleChange('catOrDog')}
                   >
                     <FormControlLabel value="Both" control={<Radio />} label="Both" />
                     <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
@@ -73,7 +100,7 @@ class FilterDropdown extends React.Component {
                     name="colours"
                     aria-label="colours"
                     value={colours}
-                    onChange={handleChange('colours')}
+                    onChange={this.handleChange('colours')}
                   >
                     <FormControlLabel value="All" control={<Radio />} label="All" />
                     {}

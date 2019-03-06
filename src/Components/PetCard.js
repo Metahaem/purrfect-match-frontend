@@ -176,10 +176,8 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         <Card.Description>{true ? pet.description : shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Link to={`/pets/${pet.id}`}>
           <Icon name='info circle' />
           See more about {pet.name}!
-        </Link>
       </Card.Content>
     </Card>
     </div> 
