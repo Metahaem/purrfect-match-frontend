@@ -45,12 +45,15 @@ class App extends Component {
 
     // ----------------------Filters
     
-  toggleFilterMenu = () => {
-    const newState = !this.state.filtersVisible
-    this.setState({filtersVisible: newState})
-  }
-
   setFilters = (object) => this.setState({filters: object})
+
+  handleChange = key => (event, value) => {
+    this.setState({
+      filters: {[key]: value}
+    });
+  };
+
+  // ------------------Render 
 
   render() {
     const {login} = this
@@ -59,8 +62,8 @@ class App extends Component {
         <Navbar 
           filtersVisible={this.state.filterMenu} 
           filters={this.state.filters} 
-          toggleFilterMenu={this.toggleFilterMenu} 
           setFilters={this.state.setFilters}
+          handleChange={this.handleChange}
         />
 
         <Switch>

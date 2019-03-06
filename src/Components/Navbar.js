@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Navbar.css';
 import '../scss/freelancer.scss';
@@ -9,23 +9,15 @@ import '../css/freelancer.min.css'
 import ImageAvatar from './Avatar'
 import cat from '../cat.png'
 import Grid from '@material-ui/core/Grid'
+import Filters from './Filters'
 // import '../vendor/jquery/jquery.min.js'
 // import '../vendor/bootstrap/js/bootstrap.bundle.min.js'
 // import '../vendor/jquery-easing/jquery.easing.min.js'
 // import '../vendor/magnific-popup/jquery.magnific-popup.min.js'
 
 
-class Navbar extends Component {
 
-  state = {
-    maxAge: '',
-    minAge: '',
-    catOrDog: '',
-    breeds: '', 
-    colours: '' 
-  }
-
-  render() {
+const Navbar = (props) => {
     return (
     <Grid container spacing={6}>
       <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
@@ -44,7 +36,12 @@ class Navbar extends Component {
           <ul className="navbar-nav ml-auto">
           <Grid item xs={12}> 
             <li className="nav-item mx-0 mx-lg-1">
-              <a className="nav-link py-3 px-0 px-lg-3" href="#get-started"><i className="fas fa-bars"></i> Filter Pets</a>
+            <Filters 
+              filtersVisible={props.filterMenu} 
+              filters={props.filters} 
+              setFilters={props.setFilters}
+              handleChange={props.handleChange}
+            />
             </li>
             </Grid>
             <Grid item xs={12}> 
@@ -60,6 +57,5 @@ class Navbar extends Component {
     </Grid>
     )
   }
-}
 
   export default Navbar
