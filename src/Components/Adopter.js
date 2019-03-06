@@ -3,8 +3,11 @@ import PetCard from "./PetCard.js"
 import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
-import Grid from '@material-ui/core/Grid'
+// import Grid from '@material-ui/core/Grid'
 import { Transition } from 'semantic-ui-react'
+import SideRail from './SideRail'
+import { Grid, Image, Rail, Segment } from 'semantic-ui-react'
+
 
 class Adopter extends Component {
     state = {
@@ -143,16 +146,27 @@ class Adopter extends Component {
         const { currentPet, visible, likeOrReject, likedPets } = this.state
         return (
         <div>
-            <Grid container justify="center">
-                <ClippedDrawer likedPets={likedPets}/>
-                <Transition.Group animation={likeOrReject == 'like' ? 'slide right' : 'slide left'} duration={500}>
-                    <PetCard 
-                        className="ui middle aligned centered" 
-                        pet={currentPet}
-                        handleLike={this.handleLike}
-                        handleReject={this.handleReject}
-                     />
-                </Transition.Group>
+            <Grid centered columns={3}>
+                <Grid.Column>
+    
+                            <SideRail likedPets={likedPets}/>
+                         
+                </Grid.Column>
+                <Grid.Column>
+                    <Segment className="bg2">
+                        <PetCard 
+                            className="ui middle aligned centered" 
+                            pet={currentPet}
+                            handleLike={this.handleLike}
+                            handleReject={this.handleReject}
+                            />
+                    </Segment>
+                </Grid.Column>
+                <Grid.Column>
+                <Rail size='tiny' position='right'>
+                            <h2>Hi there</h2>
+                         </Rail>
+                </Grid.Column>
             </Grid>
         </div>
         )

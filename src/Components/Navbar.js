@@ -18,7 +18,7 @@ import cat from '../cat.png'
 
 
 
-const Navbar = () => {
+const Navbar = ({logout}) => {
     return (
     <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <ImageAvatar photo={cat}/>    
@@ -37,7 +37,7 @@ const Navbar = () => {
             <a className="nav-link py-3 px-0 px-lg-3" href="#about">About</a>
           </li>
           <li className="nav-item mx-0 mx-lg-1">
-            <a className="nav-link py-3 px-0 px-lg-3" href="#log-in">Log Out</a>
+            <a className="nav-link py-3 px-0 px-lg-3" onClick={logout}>Log Out</a>
           </li>
         </ul>
       </div>

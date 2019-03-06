@@ -57,7 +57,7 @@ class App extends Component {
     const {login} = this
     return (
       <div className='bg text-white mb-0'>
-      <Navbar />
+      <Navbar logout={this.logout}/>
       <Switch>
         <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
         <Route path="/adopter" component={routerProps => <Adopter login={login} username={this.state.username} {...routerProps}/>}/>
