@@ -22,7 +22,7 @@ import '../css/freelancer.min.css'
 import Navbar from './Navbar'
 import Petsnip from './Petsnip'
 
-const drawerWidth = 340;
+const drawerWidth = 200;
 
 
 const styles = theme => ({

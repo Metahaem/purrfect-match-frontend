@@ -33,11 +33,13 @@ class FilterDropdown extends React.Component {
             minAge: 0,
             catOrDog: "Both",
             colours: '' ,
-            open: false
-        }
+            
+        },
+        open: false
     }
 
   handleChange = key => (event, value) => {
+      event.preventDefault()
       let filterClone = {...this.state.filters}
       filterClone[key] = value
         this.setState({
@@ -47,11 +49,7 @@ class FilterDropdown extends React.Component {
                 this.props.changeAppState(this.state.filters) 
             }
         });
-        
-        // debugger
-        
     }
-    // this.props.changeAppState(this.state.filters)
 
 
   handleDeleteExample = () => {
