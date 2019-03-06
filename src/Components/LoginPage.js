@@ -89,16 +89,9 @@ class LoginPage extends Component {
                     <div>
                         <header className="masthead text-white text-center">
                             <div className="container">
-                                <h3 className="font-weight-light mb-0">Find your</h3>
                                     <img className="img-fluid mb-5 d-block mx-auto" src={cat} />
-                                <h2 className="mb-0">Purrfect Match</h2>
-                            </div>
-
-                            <div className="container-fluid">
-                            <ul className="nav navbar-nav">
-                                <li><Link activeClass="active" className="test1" to="login" spy={true} smooth={true} duration={500} delay={100} >Log In</Link></li>
-                                <li><Link activeClass="active" className="test1" to="signup" spy={true} smooth={true} duration={500} delay={100}>Sign Up</Link></li>
-                            </ul>
+                                <h2 className="font-weight-light mb-0">Find your</h2>
+                                <h1 className="mb-0">Purrfect Match</h1>
                             </div>
                         </header>
                     </div>

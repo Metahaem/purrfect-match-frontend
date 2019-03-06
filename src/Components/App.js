@@ -26,7 +26,6 @@ const theme = createMuiTheme({
 class App extends Component {
   state = {
     username: '',
-    filtersVisible: false,
     filters: null,
     adopterOrHome: null
   }
@@ -83,8 +82,6 @@ class App extends Component {
           <Route component={() => <h1>Page not found.</h1>} />
 
         </Switch>
-
-        <button onClick={this.logout}>Logout</button>
 
       </div>
     )
