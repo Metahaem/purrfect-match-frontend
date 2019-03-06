@@ -148,7 +148,6 @@ class Adopter extends Component {
                 <Transition.Group animation={likeOrReject == 'like' ? 'slide right' : 'slide left'} duration={500}>
                     <PetCard 
                         className="ui middle aligned centered" 
-                        style='padding-top: 89px'
                         pet={currentPet}
                         handleLike={this.handleLike}
                         handleReject={this.handleReject}

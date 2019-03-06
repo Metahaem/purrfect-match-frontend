@@ -154,7 +154,7 @@ const PetCard = ({pet, handleLike, handleReject}) => {
   }
 
   return (
-    <div className="buddy">
+    <div style={{padding: "150px"}}>
     <Card>
       <Image src={pet.photo} />
       <Button.Group size='large'>
