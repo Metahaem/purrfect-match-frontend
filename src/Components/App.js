@@ -8,6 +8,7 @@ import { createBrowserHistory } from "history";
 import { createMuiTheme } from '@material-ui/core/styles';
 import Navbar from './Navbar'
 import '../vendor/fontawesome-free/css/all.min.css'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 
 
 const history = createBrowserHistory();

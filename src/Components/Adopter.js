@@ -4,18 +4,20 @@ import '../App.css';
 import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
 import Grid from '@material-ui/core/Grid'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import { Transition } from 'semantic-ui-react'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
+
 
 class Adopter extends Component {
     state = {
         likedPets: [],
-        unlikedPets: [],
+        unseenPets: [],
         currentPet: {},
         rejectedPets: [],
         adopterID: null,
         userCoordinates: {},
         likeOrReject: null,
-
         }
 
     // getCoordinates = async (postcode) => {
@@ -57,11 +59,11 @@ class Adopter extends Component {
         })
     }
 
-    removePetFromUnlikedPets = (pet) => {
-        let unlikeClone = [...this.state.unlikedPets]
+    removePetFromUnseenPets = (pet) => {
+        let unlikeClone = [...this.state.unseenPets]
         const filteredList = unlikeClone.filter(eachPet => eachPet.id !== pet.id)
         this.setState({
-            unlikedPets: filteredList
+            unseenPets: filteredList
         })
     }
 
@@ -78,7 +80,7 @@ class Adopter extends Component {
             likeOrReject: 'like',
         })
         this.addPetToLikedPets(targetPet)
-        this.removePetFromUnlikedPets(targetPet)
+        this.removePetFromUnseenPets(targetPet)
         this.newPetCard()
         API.createLike(targetPet.id, this.state.adopterID)
     }
@@ -88,7 +90,7 @@ class Adopter extends Component {
         const targetPet = this.state.currentPet
         this.setState({likeOrReject: 'reject'})
         this.addPetToRejectedPets(targetPet)
-        this.removePetFromUnlikedPets(targetPet)
+        this.removePetFromUnseenPets(targetPet)
         this.newPetCard()
     }
 
@@ -96,8 +98,12 @@ class Adopter extends Component {
     // -------------------------Card functionality
 
     newPetCard = () => {
-        const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
-        this.setState({currentPet: newPet})
+        const petIDs = this.state.unseenPets.map(pet => pet.id)
+        const randomID = petIDs[Math.floor(Math.random()*petIDs.length)]
+        debugger
+        this.props.history.push(`/adopter/${randomID}`)
+        // const newPet = this.state.unseenPets[Math.floor(Math.random()*this.state.unseenPets.length)]
+        // this.setState({currentPet: newPet})
     }
 
 
@@ -113,7 +119,7 @@ class Adopter extends Component {
     // ------------------------ Page load functionality
     setPetsToState = (petData) => {
         this.setState({
-            unlikedPets: petData.filter(pet => !this.singlePetLikedByAdopter(pet)),
+            unseenPets: petData.filter(pet => !this.singlePetLikedByAdopter(pet)),
             likedPets: petData.filter(pet => this.singlePetLikedByAdopter(pet))
         })
     }
@@ -135,27 +141,39 @@ class Adopter extends Component {
                 .then(id => this.setAdopterIDToState(id))
                 .then(() => API.getPets())
                 .then(allPets => this.setPetsToState(allPets))
-                .then(() => this.newPetCard())
+                // .then(() => this.newPetCard())
         }
     }
+
 
         
     render () {
         const { currentPet, likeOrReject, likedPets } = this.state
         return (
+            <Router>
+                
         <div>
             <Grid container justify="center">
             <ClippedDrawer likedPets={likedPets}/>
                 <Grid item justify="center">
-                    <PetCard 
-                        className="ui middle aligned centered" 
-                        pet={currentPet}
-                        handleLike={this.handleLike}
-                        handleReject={this.handleReject}
-                     />
+                    <Switch>
+                            <Route exact path={`/adopter/:id`} component={({match}) => {
+                                return <PetCard 
+                                    className="ui middle aligned centered" 
+                                    routeInfo={match}
+                                    unseenPets={this.state.unseenPets}
+                                    handleLike={this.handleLike}
+                                    handleReject={this.handleReject}
+                                />
+                            }}/>
+                      
+                        <Route component={() => <h1>Animal not found.</h1>} />
+                    </Switch>
+
                 </Grid>
             </Grid>
         </div>
+            </Router>
         )
     }
 }  

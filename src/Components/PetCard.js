@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, Button, Icon, Image } from 'semantic-ui-react'
 import {Route, Link } from 'react-router-dom'
 // import PropTypes from 'prop-types';
@@ -145,18 +145,34 @@ import {Route, Link } from 'react-router-dom'
 // export default withStyles(styles)(PetCard);
 
 
-const PetCard = ({pet, handleLike, handleReject}) => {
+class PetCard extends Component {
 
-  const shortenedDescription = (description) => {
+  state = {
+    currentPet: null
+  }
+
+ 
+
+  shortenedDescription = (description) => {
     if (description) {
       return description.length > 100 ? description.substring(0, 100) + "..." : description
     }
   }
 
+  componentDidMount () {
+    this.setState( {currentPet: this.props.unseenPets.find(pet => pet.id === 22)},
+    () => this.render()
+    )
+  }
+
+
+render() {
+  const {handleLike, handleReject} = this.props
+  const { pet } = this.state.currentPet;
   return (
     <div style={{padding: "150px"}}>
     <Card>
-      <Image src={pet.photo} />
+      {/* <Image src={pet.photo} />
       <Button.Group size='large'>
           <Button circular color='red' icon='close' onClick={handleReject} />
           <Button.Or />
@@ -173,16 +189,18 @@ const PetCard = ({pet, handleLike, handleReject}) => {
         <Card.Meta> 
           <span className='date'>Age: {pet.age}</span>
         </Card.Meta>
-        <Card.Description>{true ? pet.description : shortenedDescription(pet.description)}</Card.Description>
+        <Card.Description>{true ? pet.description : this.shortenedDescription(pet.description)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
           <Icon name='info circle' />
           See more about {pet.name}!
-      </Card.Content>
+      </Card.Content> */}
     </Card>
     </div> 
     
     )
+
+  }
 }
 
   export default PetCard
