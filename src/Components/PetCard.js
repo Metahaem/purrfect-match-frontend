@@ -23,6 +23,7 @@ import ImageAvatar from './Avatar.js';
 import cat from '../cat.png'
 import dog from '../dog.png'
 import heart from '../heart.png'
+import cross from '../cross.png'
 
 
 const styles = theme => ({
@@ -66,7 +67,8 @@ class PetCard extends React.Component {
 
   render() {
     const { classes, pet, handleLike, handleReject } = this.props
-    
+
+
     return (
       <div style={{padding: "150px"}}>
       <Card className={classes.card}>
@@ -81,7 +83,7 @@ class PetCard extends React.Component {
         
           <li>{pet.breed ? `${pet.breed}` : "" }</li>
 
-          <li>{pet.colour ? `Colour: ${pet.colour}` : "" }</li>
+          {pet.colour ? <li> Colour: {pet.colour}</li> : "" }
           </div>
           }
   
@@ -92,11 +94,11 @@ class PetCard extends React.Component {
           title="Animal photo"
         />
         <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton onClick={handleReject}>
+            <ImageAvatar photo={cross} />
+          </IconButton>
           <IconButton onClick={handleLike} src={heart}>
             <ImageAvatar photo={heart} />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
           </IconButton>
           <IconButton
             className={classnames(classes.expand, {
@@ -114,6 +116,9 @@ class PetCard extends React.Component {
             <Typography paragraph>
               {pet.description}
             </Typography>
+            <Typography paragraph>
+              {pet.name} is currently living in an adoption home. <a href={pet.link}>Click here</a> for details on how to adopt.
+            </Typography>
           </CardContent>
         </Collapse>
       </Card>
@@ -128,46 +133,4 @@ PetCard.propTypes = {
 
 export default withStyles(styles)(PetCard);
 
-
-// const PetCard = ({pet, handleLike, handleReject}) => {
-
-//   const shortenedDescription = (description) => {
-//     if (description) {
-//       return description.length > 100 ? description.substring(0, 100) + "..." : description
-//     }
-//   }
-
-//   return (
-//     <div style={{padding: "150px"}}>
-//     <Card>
-//       <Image src={pet.photo} />
-//       <Button.Group size='large'>
-//           <Button circular color='red' icon='close' onClick={handleReject} />
-//           <Button.Or />
-//           <Button circular color='green' icon='heart' onClick={handleLike} />
-//       </Button.Group>
-//       <Card.Content>
-//         <Card.Header>{pet.name}</Card.Header>
-//         <Card.Meta>
-//           <span className='date'>{pet.breed}</span>
-//         </Card.Meta>
-//         <Card.Meta> 
-//           <span className='date'>{pet.colour ? `Colour: ${pet.colour}` : "" }</span>
-//         </Card.Meta>
-//         <Card.Meta> 
-//           <span className='date'>Age: {pet.age}</span>
-//         </Card.Meta>
-//         <Card.Description>{true ? pet.description : shortenedDescription(pet.description)}</Card.Description>
-//       </Card.Content>
-//       <Card.Content extra>
-//           <Icon name='info circle' />
-//           See more about {pet.name}!
-//       </Card.Content>
-//     </Card>
-//     </div> 
-    
-//     )
-// }
-
-//   export default PetCard
 
