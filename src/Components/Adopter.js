@@ -148,20 +148,20 @@ class Adopter extends Component {
 
         
     render () {
-        const { currentPet, likeOrReject, likedPets } = this.state
-        const pet = this.state.unseenPets.find(pet => pet.id === 22)
+        const { currentPet, likeOrReject, likedPets, unseenPets } = this.state
+        // const pet = this.state.unseenPets.find(pet => pet.id === 22)
         return (
             <Router>
                 
         <div>
-            <Grid container justify="center">
+            <Grid container>
             <ClippedDrawer likedPets={likedPets}/>
-                <Grid item justify="center">
+                <Grid item >
                     <Switch>
                             <Route exact path={`/adopter/:id`} component={({match}) => {
                                 return <PetCard 
                                     className="ui middle aligned centered" 
-                                    pet={pet}
+                                    pet={unseenPets[0]}
                                     unseenPets={this.state.unseenPets}
                                     handleLike={this.handleLike}
                                     handleReject={this.handleReject}

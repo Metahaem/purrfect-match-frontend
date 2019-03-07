@@ -166,11 +166,12 @@ class PetCard extends Component {
 
 
 render() {
-  const {handleLike, handleReject, pet} = this.props
+  const {handleLike, handleReject} = this.props
   return (
     <div style={{padding: "150px"}}>
-    <Card>
-      <Image src={pet.photo} />
+    {/* <Card> */}
+      <h2>{this.props.pet.name}</h2>
+      {/* <Image src={pet.photo} />
       <Button.Group size='large'>
           <Button circular color='red' icon='close' onClick={handleReject} />
           <Button.Or />
@@ -192,32 +193,11 @@ render() {
       <Card.Content extra>
           <Icon name='info circle' />
           See more about {pet.name}!
-      </Card.Content>
-    </Card>
+      </Card.Content> */}
+    {/* </Card> */}
     </div> 
     
     )
-
   }
 }
-
   export default PetCard
-
-//   <!DOCTYPE html>
-// <html>
-// <head>
-// <meta name="viewport" content="width=device-width, initial-scale=1">
-// <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
-// <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-// <script src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
-// </head>
-// <body>
-//   <div id="container">
-//     <div class="buddy" style="display: block;"><div class="avatar"  style="display: block; background-image: url(https://1.bp.blogspot.com/_qEbjiFbQWGM/TCBVlN3mkYI/AAAAAAAADCM/7CjYqUHwbgY/s1600/workshop_modell_0126.jpg)"></div></div>
-//     <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://static.stylemagazin.hu/medias/29280/Nem-ehezik-a-Women-of-the-Year-legjobb-modell-dijara-eselyes-szepseg_32fc7c86954a8847610499a0fc7261e2.jpg)"></div></div>  
-//     <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://w1nd.cc/promo/347.jpg)"></div></div>  
-// <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://ell.h-cdn.co/assets/cm/15/01/54a769be3112d_-_elle-rata-insta-1-24375723.png)"></div></div>  
-//     <div class="buddy"><div class="avatar" style="display: block; background-image: url(http://hircsarda.hu/wp-content/uploads/2016/03/orban1.jpeg)"></div></div>  
-//   </div>
-// </body>
-// </html>

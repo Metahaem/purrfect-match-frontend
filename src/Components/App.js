@@ -59,12 +59,12 @@ class App extends Component {
     const {login} = this
     return (
       <div className='bg text-white mb-0'>
-        <Navbar 
+        {/* <Navbar 
           filters={this.state.filters} 
           setFilters={this.state.setFilters}
           changeAppState={this.changeAppState}
           logout={this.logout}
-        />
+        /> */}
 
         <Switch>
 
