@@ -63,7 +63,7 @@ class App extends Component {
           changeAppState={this.changeAppState}
           logout={this.logout}
         />
-
+        
         <Switch>
 
           <Route path='/login' component={routerProps => <LoginPage login={login} {...routerProps} />} />
@@ -82,7 +82,7 @@ class App extends Component {
           <Route component={() => <h1>Page not found.</h1>} />
 
         </Switch>
-
+        
       </div>
     )
   }
