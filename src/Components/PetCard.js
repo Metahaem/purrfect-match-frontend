@@ -24,6 +24,9 @@ import cat from '../cat.png'
 import dog from '../dog.png'
 import heart from '../heart.png'
 import cross from '../cross.png'
+import {Button} from 'semantic-ui-react'
+
+
 
 
 const styles = theme => ({
@@ -53,24 +56,14 @@ const styles = theme => ({
 });
 
 class PetCard extends React.Component {
-  state = { expanded: false };
-
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
-
-  shortenedDescription = (description) => {
-    if (description) {
-      return description.length > 100 ? description.substring(0, 100) + "..." : description
-    }
-  }
-
+  
   render() {
-    const { classes, pet, handleLike, handleReject } = this.props
+    const { classes, pet, handleLike, handleReject, handleExpandClick, expanded, likedPets, backToUnseen } = this.props
 
 
     return (
       <div style={{padding: "150px"}}>
+      {likedPets.find(eachPet=>eachPet.id===pet.id) ? <Button onClick={backToUnseen}>Back to unseen pets</Button> : null}
       <Card className={classes.card}>
         <CardHeader
           avatar={
@@ -97,21 +90,22 @@ class PetCard extends React.Component {
           <IconButton onClick={handleReject}>
             <ImageAvatar photo={cross} />
           </IconButton>
-          <IconButton onClick={handleLike} src={heart}>
-            <ImageAvatar photo={heart} />
-          </IconButton>
-          <IconButton
+          <div style={{paddingRight: '4px'}}> <IconButton
             className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
+              [classes.expandOpen]: expanded,
             })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
             aria-label="Show more"
           >
             <ExpandMoreIcon />
           </IconButton>
+          </div>
+          <IconButton onClick={handleLike} src={heart}>
+            <ImageAvatar photo={heart} />
+          </IconButton>
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
               {pet.description}

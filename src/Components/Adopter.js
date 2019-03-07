@@ -25,7 +25,8 @@ class Adopter extends Component {
         adopterID: null,
         userCoordinates: {},
         likeOrReject: null,
-        popper: null
+        popper: null,
+        expanded: false
         }
 
     // getCoordinates = async (postcode) => {
@@ -154,9 +155,9 @@ class Adopter extends Component {
 
     handleSnipClick = (event, id) => {
         event.preventDefault()
-        console.log("clicked", id)
-        let newPopper=this.state.likedPets.find(pet=>pet.id===id)
-        this.setState({popper: newPopper})
+        let newPet=this.state.likedPets.find(pet=>pet.id===id)
+        this.setState({currentPet: newPet})
+        this.setState({expanded: true})
     }
     
     handleSnipDelete = (event, id) => {
@@ -165,6 +166,15 @@ class Adopter extends Component {
         this.removePetFromLikedPets(pet)
         API.deleteLike(id, this.state.adopterID)
     }
+
+    handleExpandClick = () => {
+        this.setState(state => ({ expanded: !state.expanded }));
+      };
+
+      backToUnseen = () => {
+        this.setState({expanded: false})
+        this.newPetCard()
+      }
 
     componentDidMount () {
         const {history} = this.props
@@ -184,14 +194,10 @@ class Adopter extends Component {
         
     render () {
         const { currentPet, likeOrReject, likedPets, popper } = this.state
-        const id = popper ? 'simple-popper' : null;
-        const pop = (<SimplePopper id={id} popper={popper}/>)
+        // const id = popper ? 'simple-popper' : null;
+        // const pop = (<SimplePopper id={id} popper={popper}/>)
         
-        const card = (<PetCard 
-        pet={currentPet}
-        handleLike={this.handleLike}
-        handleReject={this.handleReject} 
-     />) 
+       
         return (
             <div style={{backgroundColor: '#18BC9C'}}>
                 <Grid container justify="center">
@@ -199,7 +205,15 @@ class Adopter extends Component {
                 <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
                     <Grid item justify="center">
                         <div className="ui middle aligned centered">
-                        {popper ? pop : card}  
+                        <PetCard 
+                            pet={currentPet}
+                            handleLike={this.handleLike}
+                            handleReject={this.handleReject} 
+                            handleExpandClick={this.handleExpandClick}
+                            expanded={this.state.expanded}
+                            likedPets={this.state.likedPets}
+                            backToUnseen={this.backToUnseen}
+                        /> 
                         </div>
                     </Grid>
                 </Grid>
