@@ -149,6 +149,7 @@ class Adopter extends Component {
         
     render () {
         const { currentPet, likeOrReject, likedPets } = this.state
+        const pet = this.state.unseenPets.find(pet => pet.id === 22)
         return (
             <Router>
                 
@@ -160,7 +161,7 @@ class Adopter extends Component {
                             <Route exact path={`/adopter/:id`} component={({match}) => {
                                 return <PetCard 
                                     className="ui middle aligned centered" 
-                                    routeInfo={match}
+                                    pet={pet}
                                     unseenPets={this.state.unseenPets}
                                     handleLike={this.handleLike}
                                     handleReject={this.handleReject}

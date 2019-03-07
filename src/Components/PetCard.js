@@ -147,9 +147,9 @@ import {Route, Link } from 'react-router-dom'
 
 class PetCard extends Component {
 
-  state = {
-    currentPet: null
-  }
+  // state = {
+  //   currentPet: null
+  // }
 
  
 
@@ -159,20 +159,18 @@ class PetCard extends Component {
     }
   }
 
-  componentDidMount () {
-    this.setState( {currentPet: this.props.unseenPets.find(pet => pet.id === 22)},
-    () => this.render()
-    )
-  }
+  // componentDidMount () {
+  //   this.setState(props => ({currentPet: props.unseenPets.find(pet => pet.id === 22)
+  //   }))
+  // }
 
 
 render() {
-  const {handleLike, handleReject} = this.props
-  const { pet } = this.state.currentPet;
+  const {handleLike, handleReject, pet} = this.props
   return (
     <div style={{padding: "150px"}}>
     <Card>
-      {/* <Image src={pet.photo} />
+      <Image src={pet.photo} />
       <Button.Group size='large'>
           <Button circular color='red' icon='close' onClick={handleReject} />
           <Button.Or />
@@ -194,7 +192,7 @@ render() {
       <Card.Content extra>
           <Icon name='info circle' />
           See more about {pet.name}!
-      </Card.Content> */}
+      </Card.Content>
     </Card>
     </div> 
     
