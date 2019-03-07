@@ -44,23 +44,23 @@ const Navbar = (props) => {
       </div>
   )
 
-  const houseAv = <div><ImageAvatar photo={house}/></div>
+  const houseAv = (<div><ImageAvatar photo={house}/></div>)
   
     return (
-    <Grid container xs={6}>
+    <Grid container>
       <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <Grid item xs={6}> 
         </Grid>
         <Grid item xs={6}>
         <ImageAvatar photo={cat}/> 
         </Grid>   
-        <Grid item style={{paddingRight: "100px"}}>
-        <div >
+        <Grid item xs={12}>
+          <div>
             <a className="navbar-brand" href="#page-top">Purrfect Match</a>
           </div>
           </Grid>
-          <Grid container xs={24}>
-            {localStorage.token ? {loggedIn} : houseAv}
+          <Grid container>
+            {localStorage.token ? loggedIn : houseAv}
           </Grid>
       
       </nav>
