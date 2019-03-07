@@ -43,11 +43,19 @@ class Adopter extends Component {
 
     addPetToLikedPets = (pet) => {
         let likeClone = [...this.state.likedPets]
-        likeClone.push(pet)
+        likeClone.find(eachPet => eachPet.id===pet.id) ? console.log("Error: already liked") : likeClone.push(pet)
         this.setState({
             likedPets: likeClone
         })
     }
+
+    // addPetToUnlikedPets = (pet) => {
+    //     let clone = this.state.unLikedPets
+    //     clone.push(pet)
+    //     this.setState({
+    //         unLikedPets: clone
+    //     })
+    // }
 
     addPetToRejectedPets = (pet) => {
         let rejectedClone = [...this.state.rejectedPets]
@@ -62,6 +70,14 @@ class Adopter extends Component {
         const filteredList = unlikeClone.filter(eachPet => eachPet.id !== pet.id)
         this.setState({
             unlikedPets: filteredList
+        })
+    }
+
+    removePetFromLikedPets = (pet) => {
+        let clone = [...this.state.likedPets]
+        const filteredList = clone.filter(eachPet => eachPet.id !== pet.id)
+        this.setState({
+            likedPets: filteredList
         })
     }
 
@@ -126,14 +142,16 @@ class Adopter extends Component {
         })
     }
 
-    handleSnipClick = (event) => {
+    handleSnipClick = (event, id) => {
         event.preventDefault()
-        console.log("clicked")
+        console.log("clicked", id)
     }
     
-    handleSnipDelete = (event) => {
+    handleSnipDelete = (event, id) => {
         event.preventDefault()
-        console.log("deleted!")
+        const pet = this.state.likedPets.find(pet => pet.id === id)
+        this.removePetFromLikedPets(pet)
+        API.deleteLike(id, this.state.adopterID)
     }
 
     componentDidMount () {

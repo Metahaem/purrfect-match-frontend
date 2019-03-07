@@ -66,6 +66,7 @@ function ClippedDrawer(props) {
         <List>
           {likedPets.map(pet => (
             <Petsnip 
+              key={pet.id}
               pet={pet} 
               handleSnipClick={handleSnipClick}
               handleSnipDelete={handleSnipDelete}

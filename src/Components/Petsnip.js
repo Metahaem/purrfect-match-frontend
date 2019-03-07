@@ -32,10 +32,11 @@ function Petsnip(props) {
     <div className={classes.root}>
    
       <Chip
+        key={pet.id}
         avatar={<Avatar alt="Pet Image" src={pet.photo} />}
         label={pet.name}
-        onDelete={handleSnipDelete}
-        onClick={handleSnipClick}
+        onDelete={(e) => handleSnipDelete(e, pet.id)}
+        onClick={(e) => handleSnipClick(e, pet.id)}
         className={classes.chip}
       />
       

@@ -52,6 +52,21 @@ class API {
     }).then(res => res.json())
   }
 
+  static deleteLike = (petID, adopterID) => {
+    return fetch(baseURL + '/likes/delete', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        pet_id: petID,
+        adopter_id: adopterID
+      })
+    }).then(res => res.json())
+  }
+
   static getAdopterID () {
     return fetch ('http://localhost:3000/api/v1/adopter', {
       headers: { 
