@@ -107,7 +107,9 @@ class Adopter extends Component {
         return pet.likes.find(like => like.adopter_id === this.state.adopterID)
     }
 
+    // ---------------Filtering
 
+    
     
 
     // ------------------------ Page load functionality
@@ -122,6 +124,16 @@ class Adopter extends Component {
         return this.setState({
             adopterID: id
         })
+    }
+
+    handleSnipClick = (event) => {
+        event.preventDefault()
+        console.log("clicked")
+    }
+    
+    handleSnipDelete = (event) => {
+        event.preventDefault()
+        console.log("deleted!")
     }
 
     componentDidMount () {
@@ -142,10 +154,11 @@ class Adopter extends Component {
         
     render () {
         const { currentPet, likeOrReject, likedPets } = this.state
+        
         return (
         <div>
             <Grid container justify="center">
-            <ClippedDrawer likedPets={likedPets}/>
+            <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
                 <Grid item justify="center">
                     <PetCard 
                         className="ui middle aligned centered" 

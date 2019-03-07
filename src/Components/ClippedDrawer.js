@@ -49,7 +49,7 @@ const styles = theme => ({
 });
 
 function ClippedDrawer(props) {
-  const { classes, likedPets } = props;
+  const { classes, likedPets, handleSnipClick, handleSnipDelete } = props;
 
   return (
     <div className={classes.root}>
@@ -65,7 +65,11 @@ function ClippedDrawer(props) {
       <div className='navbar-brand'>Your Selections</div>
         <List>
           {likedPets.map(pet => (
-            <Petsnip pet={pet} />
+            <Petsnip 
+              pet={pet} 
+              handleSnipClick={handleSnipClick}
+              handleSnipDelete={handleSnipDelete}
+              />
           ))}
         </List>
         <Divider />
