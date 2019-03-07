@@ -71,6 +71,7 @@ class App extends Component {
 
           <Route path="/adopter" component={routerProps => 
             <Adopter 
+              className='bg'
               login={login} 
               username={this.state.username} 
               filters={this.state.filters} 

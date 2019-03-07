@@ -22,19 +22,20 @@ class SimplePopper extends React.Component {
     const id = open ? 'simple-popper' : null;
 
     return (
-      <div>
+      <div style={{margin: 'auto', padding: '50px'}}>
+      <div style={{backgroundColor: '#18BC9C'}}>
         <Popper id={id} popper={popper} open={!!popper} transition>
                 {({ TransitionProps }) => (
-                    <Fade {...TransitionProps} timeout={350}>
+                    <Fade {...TransitionProps} timeout={1000}>
                     <Paper>
-                    <PetCard 
-                        className="ui middle aligned centered" 
+                    <PetCard  
                         pet={popper}
                      />
                      </Paper>
                     </Fade>
                 )}
             </Popper>
+            </div>
       </div>
     );
   }

@@ -14,6 +14,8 @@ import SimplePopper from './Popper'
 
 import Fade from '@material-ui/core/Fade';
 
+
+
 class Adopter extends Component {
     state = {
         likedPets: [],
@@ -185,27 +187,28 @@ class Adopter extends Component {
         const id = popper ? 'simple-popper' : null;
         const pop = (<SimplePopper id={id} popper={popper}/>)
         
-        const PetCard = (<PetCard 
-        className="ui middle aligned centered" 
+        const card = (<PetCard 
         pet={currentPet}
         handleLike={this.handleLike}
         handleReject={this.handleReject} 
      />) 
         return (
-            <div>
+            <div style={{backgroundColor: '#18BC9C'}}>
                 <Grid container justify="center">
             
                 <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
                     <Grid item justify="center">
-            
-                        {popper ? pop : PetCard}  
-            
+                        <div className="ui middle aligned centered">
+                        {popper ? pop : card}  
+                        </div>
                     </Grid>
                 </Grid>
             </div>
         )
     }
 }  
+
+
 
 export default Adopter
 
