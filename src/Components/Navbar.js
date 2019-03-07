@@ -25,12 +25,12 @@ const Navbar = (props) => {
           <Grid item xs={12}> 
             <li className="nav-item mx-0 mx-lg-1">
   
-            <Filters 
+            {/* <Filters 
               filtersVisible={props.filterMenu} 
               filters={props.filters} 
               setFilters={props.setFilters}
               changeAppState={props.changeAppState}
-            />
+            /> */}
             </li>
             </Grid>
             <Grid item xs={12}> 
@@ -47,7 +47,7 @@ const Navbar = (props) => {
   const houseAv = (<div><ImageAvatar photo={house}/></div>)
   
     return (
-    <Grid container>
+      <Grid container>
       <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <Grid item xs={6}> 
         </Grid>

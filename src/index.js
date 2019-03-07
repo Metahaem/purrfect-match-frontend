@@ -9,10 +9,13 @@ import 'semantic-ui-react'
 import 'bootstrap/dist/css/bootstrap.css';
 import * as Scroll from 'react-scroll';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import './App.css';
 
 ReactDOM.render(  
   <Router>
+    <div className='bg'>
     <App  />
+    </div>
   </Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

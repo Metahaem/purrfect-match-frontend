@@ -59,7 +59,14 @@ class PetCard extends React.Component {
   
   render() {
     const { classes, pet, handleLike, handleReject, handleExpandClick, expanded, likedPets, backToUnseen } = this.props
+    
+    const crossButton = (<IconButton onClick={handleReject}>
+    <ImageAvatar photo={cross} />
+  </IconButton>)
 
+  const heartButton = (<IconButton onClick={handleLike} src={heart}>
+    <ImageAvatar photo={heart} />
+  </IconButton>)
 
     return (
       <div style={{padding: "150px"}}>
@@ -87,9 +94,9 @@ class PetCard extends React.Component {
           title="Animal photo"
         />
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton onClick={handleReject}>
-            <ImageAvatar photo={cross} />
-          </IconButton>
+
+        {likedPets.find(eachPet=>eachPet.id===pet.id) ? null : crossButton}
+
           <div style={{paddingRight: '4px'}}> <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -101,9 +108,9 @@ class PetCard extends React.Component {
             <ExpandMoreIcon />
           </IconButton>
           </div>
-          <IconButton onClick={handleLike} src={heart}>
-            <ImageAvatar photo={heart} />
-          </IconButton>
+
+        {likedPets.find(eachPet=>eachPet.id===pet.id) ? null : heartButton}
+
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>

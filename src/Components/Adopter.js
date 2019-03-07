@@ -123,7 +123,8 @@ class Adopter extends Component {
     // -------------------------Card functionality
 
     newPetCard = () => {
-        const newPet = this.state.unlikedPets[Math.floor(Math.random()*this.state.unlikedPets.length)]
+        const selection = this.props.filters ? this.applyFilters(this.state.unlikedPets) : this.state.unlikedPets
+        const newPet = selection[Math.floor(Math.random()*selection.length)]
         this.setState({currentPet: newPet})
     }
 
@@ -136,7 +137,11 @@ class Adopter extends Component {
 
     // ---------------Filtering
 
-    
+
+
+    applyFilters = (unlikedPets) => {
+        return this.props.filters.animal==="both" ? unlikedPets : unlikedPets.filter(pet => pet.species===this.props.filters.animal)
+    }
     
 
     // ------------------------ Page load functionality
@@ -201,8 +206,8 @@ class Adopter extends Component {
         return (
             <div style={{backgroundColor: '#18BC9C'}}>
                 <Grid container justify="center">
-            
                 <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
+            
                     <Grid item justify="center">
                         <div className="ui middle aligned centered">
                         <PetCard 

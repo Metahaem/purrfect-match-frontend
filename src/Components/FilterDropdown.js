@@ -29,11 +29,8 @@ const styles = theme => ({
 class FilterDropdown extends React.Component {
     state = {
         filters: {
-            maxAge: 40,
-            minAge: 0,
-            catOrDog: "Both",
-            colours: '' ,
-            
+            catOrDog: "both",
+
         },
         open: false
     }
@@ -83,13 +80,13 @@ class FilterDropdown extends React.Component {
                     value={catOrDog}
                     onChange={this.handleChange('catOrDog')}
                   >
-                    <FormControlLabel value="Both" control={<Radio />} label="Both" />
-                    <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
-                    <FormControlLabel value="Dog" control={<Radio />} label="Dog" />
+                    <FormControlLabel value="both" control={<Radio />} label="Both" />
+                    <FormControlLabel value="cat" control={<Radio />} label="Cat" />
+                    <FormControlLabel value="dog" control={<Radio />} label="Dog" />
                   </RadioGroup>
                 </FormControl>
               </Grid>
-
+{/* 
               <Grid item xs={12}>
                 <FormControl component="fieldset">
                   <FormLabel>Colour</FormLabel>
@@ -106,7 +103,7 @@ class FilterDropdown extends React.Component {
                     <FormControlLabel value="custom" control={<Radio />} label="custom" />
                   </RadioGroup>
                 </FormControl>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Paper>
         </Grid>

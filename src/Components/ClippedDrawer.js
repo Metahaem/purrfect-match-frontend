@@ -62,7 +62,7 @@ function ClippedDrawer(props) {
         }}
       >
       <div className={classes.toolbar} />
-      <div className='navbar-brand'>Your Selections</div>
+      <div style={{padding: "40px"}}className='navbar-brand'>Your Selections</div>
         <List>
           {likedPets.map(pet => (
             <Petsnip 
