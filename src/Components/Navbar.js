@@ -9,6 +9,7 @@ import '../css/freelancer.min.css'
 import {Button} from 'semantic-ui-react'
 import ImageAvatar from './Avatar'
 import cat from '../cat.png'
+import house from '../house.jpg'
 import Grid from '@material-ui/core/Grid'
 import Filters from './Filters'
 // import '../vendor/jquery/jquery.min.js'
@@ -17,27 +18,13 @@ import Filters from './Filters'
 // import '../vendor/magnific-popup/jquery.magnific-popup.min.js'
 
 
-
 const Navbar = (props) => {
-    return (
-    <Grid container spacing={6}>
-      <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-        <Grid item xs={6}> 
-        </Grid>
-        <Grid item xs={6}>
-        <ImageAvatar photo={cat}/> 
-        </Grid>   
-        <Grid item xs={12}>
-          <div>
-            <a className="navbar-brand" href="#page-top">Purrfect Match</a>
-          </div>
-          </Grid>
-          <Grid container xs={24}>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav ml-auto">
+  const loggedIn = (
+      <div className="collapse navbar-collapse" id="navbarResponsive">
+        <ul className="navbar-nav ml-auto">
           <Grid item xs={12}> 
             <li className="nav-item mx-0 mx-lg-1">
-            
+  
             <Filters 
               filtersVisible={props.filterMenu} 
               filters={props.filters} 
@@ -52,10 +39,29 @@ const Navbar = (props) => {
                 Log Out
               </Button>
             </li>
-            </Grid>
-          </ul>
-        </div>
+          </Grid>
+        </ul>
+      </div>
+  )
+
+  const houseAv = <div><ImageAvatar photo={house}/></div>
+  
+    return (
+    <Grid container xs={6}>
+      <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+        <Grid item xs={6}> 
         </Grid>
+        <Grid item xs={6}>
+        <ImageAvatar photo={cat}/> 
+        </Grid>   
+        <Grid item style={{paddingRight: "100px"}}>
+        <div >
+            <a className="navbar-brand" href="#page-top">Purrfect Match</a>
+          </div>
+          </Grid>
+          <Grid container xs={24}>
+            {localStorage.token ? {loggedIn} : houseAv}
+          </Grid>
       
       </nav>
     </Grid>

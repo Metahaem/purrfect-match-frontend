@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,7 +16,9 @@ import {Redirect, Route} from 'react-router-dom'
 import ImageAvatar from './Avatar'
 import cat from '../cat.png'
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
-import { Grid, GridColumn } from 'semantic-ui-react'
+import { Grid, GridColumn, Button, Icon } from 'semantic-ui-react'
+import '../App.css';
+
 
 
 const styles = theme => ({
@@ -54,7 +56,8 @@ const styles = theme => ({
 class LoginPage extends Component {
   state = {
     username: null,
-    password: null
+    password: null,
+    loginShown: false
   }
   
 
@@ -78,8 +81,63 @@ class LoginPage extends Component {
     // this.props.onLogin(this.state);
   }
 
+  showLogin = () => {
+    this.setState({loginShown: true})
+  }
+
   render() {
     if (localStorage.token && localStorage.token !== "undefined") return <Redirect to="/adopter" />
+    const login = (
+        <div> 
+          <section className="text-white mb-0" id="login">
+              <Element name="login" className="element" >
+                <Paper className={this.props.classes.paper}>
+                  <ImageAvatar photo={cat}/>
+                  <Typography component="h1" variant="h5">
+                    Log in
+                  </Typography>
+              <form onSubmit={this.handleSubmit} className={this.props.classes.form}>
+                  <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="username">Username</InputLabel>
+                    <Input onChange={this.handleChange} id="username" name="username" autoComplete="username" autoFocus />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <Input onChange={this.handleChange} name="password" type="password" id="password" autoComplete="current-password" />
+                  </FormControl>
+                <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={this.props.classes.submit}
+                >
+                  Log in
+                </Button>
+                </form>
+                </Paper>
+              </Element>
+          </section>
+        </div>
+    )
+
+    const about = (
+      <section className="bg-primary text-white mb-0" id="about">
+      <div className="container" style={{padding: "150px"}}>
+        <h3 className="text-center text-white">
+          <p>Purrfect Match helps find homes for animals in need.</p> 
+          <p>You can make a page for animals who are looking for a new family, or scroll through the pets on the site until you find your Purrfect Match.</p> </h3>
+        <hr className="star-light mb-5"/>
+        <div className="row">
+          <Button onClick={this.showLogin} >Log In</Button>
+        </div>
+      </div>
+    </section>
+    )
 
       return (
         <div className='bg text-white mb-0'> 
@@ -91,45 +149,14 @@ class LoginPage extends Component {
                             <div className="container">
                                     <img className="img-fluid mb-5 d-block mx-auto" src={cat} />
                                 <h2 className="font-weight-light mb-0">Find your</h2>
+                                <hr class="star-light"/>
                                 <h1 className="mb-0">Purrfect Match</h1>
                             </div>
                         </header>
                     </div>
                     </GridColumn> 
                     <GridColumn> 
-                        <section className="text-white mb-0" id="login">
-                            <Element name="login" className="element" >
-                              <Paper className={this.props.classes.paper}>
-                                <ImageAvatar photo={cat}/>
-                                <Typography component="h1" variant="h5">
-                                  Log in
-                                </Typography>
-                            <form onSubmit={this.handleSubmit} className={this.props.classes.form}>
-                                <FormControl margin="normal" required fullWidth>
-                                  <InputLabel htmlFor="username">Username</InputLabel>
-                                  <Input onChange={this.handleChange} id="username" name="username" autoComplete="username" autoFocus />
-                                </FormControl>
-                                <FormControl margin="normal" required fullWidth>
-                                  <InputLabel htmlFor="password">Password</InputLabel>
-                                  <Input onChange={this.handleChange} name="password" type="password" id="password" autoComplete="current-password" />
-                                </FormControl>
-                              <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                              />
-                              <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={this.props.classes.submit}
-                              >
-                                Log in
-                              </Button>
-                              </form>
-                              </Paper>
-                            </Element>
-                        </section>
+                      {this.state.loginShown ? login : about}
                     </GridColumn> 
                 </Grid.Row>
             </Grid>
