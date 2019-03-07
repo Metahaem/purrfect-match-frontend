@@ -15,6 +15,7 @@ import API from '../API'
 import {Redirect, Route} from 'react-router-dom'
 import ImageAvatar from './Avatar'
 import cat from '../cat.png'
+import dog from '../dog.png'
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import { Grid, GridColumn, Button, Icon } from 'semantic-ui-react'
 import '../App.css';
@@ -92,7 +93,7 @@ class LoginPage extends Component {
           <section className="text-white mb-0" id="login">
               <Element name="login" className="element" >
                 <Paper className={this.props.classes.paper}>
-                  <ImageAvatar photo={cat}/>
+                  <ImageAvatar photo={dog}/>
                   <Typography component="h1" variant="h5">
                     Log in
                   </Typography>
@@ -129,12 +130,14 @@ class LoginPage extends Component {
       <section className="bg-primary text-white mb-0" id="about">
       <div className="container" style={{padding: "150px"}}>
         <h3 className="text-center text-white">
-          <p>Purrfect Match helps find homes for animals in need.</p> 
-          <p>You can make a page for animals who are looking for a new family, or scroll through the pets on the site until you find your Purrfect Match.</p> </h3>
-        <hr className="star-light mb-5"/>
-        <div className="row">
+          <ImageAvatar photo={dog} />
+          <div style={{textAlign: 'justify', textJustify: 'interWord'}}>
+            <p>Purrfect Match helps find homes for animals in need.</p> 
+            <p>You can make a page for animals who are looking for a new family, or scroll through the pets on the site until you find your Purrfect Match.</p><br/>
+          </div>
           <Button onClick={this.showLogin} >Log In</Button>
-        </div>
+        </h3>
+
       </div>
     </section>
     )
