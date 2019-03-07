@@ -21,6 +21,8 @@ const styles = theme => ({
   },
   chip: {
     margin: theme.spacing.unit,
+    width: '100%',
+    height: '50px'
   },
 });
 
@@ -28,6 +30,9 @@ const styles = theme => ({
 
 function Petsnip(props) {
   const { classes, pet, handleSnipClick, handleSnipDelete } = props;
+  const {deleteIcon} = classes
+
+
   return (
     <div className={classes.root}>
    
@@ -50,20 +55,3 @@ Petsnip.propTypes = {
 
 export default withStyles(styles)(Petsnip);
 
-// const Petsnip = ({pet}) => {
-  
-//     return (
-//         <div>
-//         <Link to={`/adopter/pets/${pet.id}`}>
-//             <ListItem key={pet.id}>
-//               <ListItemIcon>
-//                 <ImageAvatar photo={pet.photo}/>
-//               </ListItemIcon>
-//               <ListItemText className='sidebar-text' primary={pet.name} />
-//             </ListItem>
-//         </Link>
-//         </div>
-//       )
-//   }
-  
-// export default Petsnip

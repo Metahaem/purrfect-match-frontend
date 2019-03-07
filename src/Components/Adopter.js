@@ -5,6 +5,14 @@ import ClippedDrawer from './ClippedDrawer.js'
 import API from '../API'
 import Grid from '@material-ui/core/Grid'
 import { Transition } from 'semantic-ui-react'
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Popper from '@material-ui/core/Popper';
+import Paper from '@material-ui/core/Paper';
+import SimplePopper from './Popper'
+
+
+import Fade from '@material-ui/core/Fade';
 
 class Adopter extends Component {
     state = {
@@ -15,7 +23,7 @@ class Adopter extends Component {
         adopterID: null,
         userCoordinates: {},
         likeOrReject: null,
-
+        popper: null
         }
 
     // getCoordinates = async (postcode) => {
@@ -145,6 +153,8 @@ class Adopter extends Component {
     handleSnipClick = (event, id) => {
         event.preventDefault()
         console.log("clicked", id)
+        let newPopper=this.state.likedPets.find(pet=>pet.id===id)
+        this.setState({popper: newPopper})
     }
     
     handleSnipDelete = (event, id) => {
@@ -171,22 +181,28 @@ class Adopter extends Component {
 
         
     render () {
-        const { currentPet, likeOrReject, likedPets } = this.state
+        const { currentPet, likeOrReject, likedPets, popper } = this.state
+        const id = popper ? 'simple-popper' : null;
+        const pop = (<SimplePopper id={id} popper={popper}/>)
         
+        const PetCard = (<PetCard 
+        className="ui middle aligned centered" 
+        pet={currentPet}
+        handleLike={this.handleLike}
+        handleReject={this.handleReject} 
+     />) 
         return (
-        <div>
-            <Grid container justify="center">
-            <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
-                <Grid item justify="center">
-                    <PetCard 
-                        className="ui middle aligned centered" 
-                        pet={currentPet}
-                        handleLike={this.handleLike}
-                        handleReject={this.handleReject}
-                     />
+            <div>
+                <Grid container justify="center">
+            
+                <ClippedDrawer likedPets={likedPets} handleSnipClick={this.handleSnipClick} handleSnipDelete={this.handleSnipDelete} />
+                    <Grid item justify="center">
+            
+                        {popper ? pop : PetCard}  
+            
+                    </Grid>
                 </Grid>
-            </Grid>
-        </div>
+            </div>
         )
     }
 }  
