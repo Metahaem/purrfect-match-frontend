@@ -69,7 +69,7 @@ class PetCard extends React.Component {
   </IconButton>)
 
     return (
-      <div style={{padding: "150px"}}>
+      <div style={{padding: "200px"}}>
       {likedPets.find(eachPet=>eachPet.id===pet.id) ? <Button onClick={backToUnseen}>Back to unseen pets</Button> : null}
       <Card className={classes.card}>
         <CardHeader

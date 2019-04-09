@@ -47,14 +47,14 @@ const Navbar = (props) => {
   const houseAv = (<div><ImageAvatar photo={house}/></div>)
   
     return (
-      <Grid container>
+      <Grid container spacing={24}>
       <nav className="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-        <Grid item xs={6}> 
+        <Grid item xs={3}> 
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
         <ImageAvatar photo={cat}/> 
         </Grid>   
-        <Grid item xs={12}>
+        <Grid item xs={3}>
           <div>
             <a className="navbar-brand" href="#page-top">Purrfect Match</a>
           </div>

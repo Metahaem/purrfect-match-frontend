@@ -1,8 +1,8 @@
-const baseURL = 'http://localhost:3000/api/v1'
+const baseURL = 'http://localhost:3001/api/v1'
 
 class API {
   static login(user) {
-    return fetch('http://localhost:3000/api/v1/users/login', {
+    return fetch('http://localhost:3001/api/v1/users/login', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(user)
@@ -10,7 +10,7 @@ class API {
   }
 
   static validate() {
-    return fetch ('http://localhost:3000/api/v1/validate', {
+    return fetch ('http://localhost:3001/api/v1/validate', {
       headers: { 
         'content-type': 'application/json', 
         'Authorization': localStorage.getItem('token')
@@ -19,7 +19,7 @@ class API {
   }
 
   static getPets() {
-    return fetch ('http://localhost:3000/api/v1/pets', {
+    return fetch ('http://localhost:3001/api/v1/pets', {
       method: 'GET',
       headers: { 
           'content-type': 'application/json', 
@@ -29,7 +29,7 @@ class API {
   }
 
   static getLikes () {
-   return fetch ('http://localhost:3000/api/v1/likes', {
+   return fetch ('http://localhost:3001/api/v1/likes', {
       headers: { 
         'content-type': 'application/json', 
         'Authorization': localStorage.getItem('token')
@@ -68,7 +68,7 @@ class API {
   }
 
   static getAdopterID () {
-    return fetch ('http://localhost:3000/api/v1/adopter', {
+    return fetch ('http://localhost:3001/api/v1/adopter', {
       headers: { 
         'content-type': 'application/json', 
         'Authorization': localStorage.getItem('token')
